@@ -1,0 +1,21 @@
+$charSelBg: #E1A2D0;
+$startBg: #19141F;
+$shadowColor: rgba(0, 0, 0, 0.25);
+
+%outline{
+  outline-offset: -5px;
+  outline-width: 10px;
+  outline-color: red;
+}
+
+@font-face {
+  font-family: 'inika';
+  src: url('../assets/fonts/Inika-Regular.ttf');
+}
+
+%nameText{
+  font-size: 128px;
+  color: white;
+  font-family: 'inika';
+  text-shadow: 0px 4px  4px $shadowColor;
+}

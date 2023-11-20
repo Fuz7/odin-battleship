@@ -6,7 +6,7 @@ module.exports = {
   mode: 'development',
 
   entry: {
-    main: './src/index.js',
+    main: './src/script/main.js',
   },
 
   output: {
@@ -32,7 +32,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Dynamic User Interface',
-      template: './src/index.html',
+      template: './src/main.html',
     }),
 
     new MiniCssExtractPlugin({
