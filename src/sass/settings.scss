@@ -1,0 +1,96 @@
+.settingsContainer{
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0px;
+  background-color: $navBg;
+  visibility: hidden;
+  &--visible{
+    @extend .settingsContainer;
+    visibility: visible;
+
+    &>.settingsPage{
+      transform: scale(1);
+    }
+  }
+  
+}
+
+.settingsPage{
+  width: 428px;
+  height: 316px;
+  margin: auto;
+  margin-top: 307px;
+  background-color: $settingPageBg;
+  display: flex;
+  border-radius: 35px;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  position: relative;
+  transition: transform 400ms cubic-bezier(0.18, 0.89, 0.43, 1.19);
+  transform: scale(0.5);
+  &__closeButton{
+    @extend %soundButtons;
+    position: absolute;
+    top: -16px;
+    right: -12px;
+    width: 69px;
+    height: 69px;
+    background-color: transparent;
+    &>span{
+      display: block;
+      width: 100%;
+      height: 100%;
+      background-image: url('../assets/images/settingsClose.svg')
+    }
+  }
+}
+
+
+
+.sfxButton{
+  @extend %soundButtons;  
+  width: 162px;
+  height: 154px;
+  margin-bottom: 23px;
+  &--on{
+    @extend .sfxButton;
+
+    &>span{
+      @extend %soundButtonsSpanElement;
+      background-image: url('../assets/images/onSfx.svg');
+    }
+  }
+
+  &--off{
+    @extend .sfxButton;
+    &>span{
+      @extend %soundButtonsSpanElement;
+      background-image: url('../assets/images/offSfx.svg');
+    }
+  }
+}
+
+.musicButton{
+  @extend %soundButtons;
+  width: 119px;
+  height: 130px;
+  &--on{
+    @extend .musicButton;
+
+    &>span{
+      @extend %soundButtonsSpanElement;
+      background-image: url('../assets/images/onMusic.svg');
+    }
+  }
+
+  &--off{
+    @extend .musicButton;
+    &>span{
+      @extend %soundButtonsSpanElement;
+      background-image: url('../assets/images/offMusic.svg');
+    }
+  }
+}
+

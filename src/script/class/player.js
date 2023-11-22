@@ -16,15 +16,16 @@ export default class Player {
     let hitBool = false;
     ships.forEach((ship) => {
       const shipCoordMark = ship.coord.find(
-        (currCorrdinate) => currCorrdinate[0] === coordinate[0] && currCorrdinate[1] === coordinate[1],
+        (currCorrdinate) =>
+          currCorrdinate[0] === coordinate[0] &&
+          currCorrdinate[1] === coordinate[1],
       );
-      if(shipCoordMark !== undefined){
-        hitBool = ship.hit()
+      if (shipCoordMark !== undefined) {
+        hitBool = ship.hit();
       }
-    })
-    if(hitBool === false){
-      this.gameboard.missedAttacks.push(coordinate)
+    });
+    if (hitBool === false) {
+      this.gameboard.missedAttacks.push(coordinate);
     }
-    ;
   }
 }

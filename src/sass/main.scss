@@ -1,3 +1,12 @@
 @import './default.scss';
 @import './var.scss';
 @import './charSel.scss';
+@import './nav.scss';
+@import './settings.scss';
+
+
+body{
+  background-image:linear-gradient( rgba(0,0,0,0.20), rgba(0,0,0,0.20)), url('../assets/images/bgImage.jpg');
+  background-size: cover;
+  position: relative;
+}

@@ -1,6 +1,8 @@
 $charSelBg: #E1A2D0;
 $startBg: #19141F;
 $shadowColor: rgba(0, 0, 0, 0.25);
+$navBg: rgba(0,0,0,0.6);
+$settingPageBg: #3B2772;
 
 %outline{
   outline-offset: -5px;
@@ -8,9 +10,31 @@ $shadowColor: rgba(0, 0, 0, 0.25);
   outline-color: red;
 }
 
+
+%soundButtons{
+  border: 0px;
+
+  position: relative;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+%soundButtonsSpanElement{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+}
+
 @font-face {
   font-family: 'inika';
   src: url('../assets/fonts/Inika-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'jotiOne';
+  src: url('../assets/fonts/JotiOne-Regular.ttf');
 }
 
 %nameText{
