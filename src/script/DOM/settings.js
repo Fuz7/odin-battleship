@@ -10,6 +10,16 @@ export default function renderVisibility(){
 
 }
 
+function toggleMusic(){
+  const backgroundMusic = document.getElementById('backgroundMusic')
+  const musicButton = document.getElementById('musicButton')
+  if(musicButton.classList.contains('musicButton--on')){
+    backgroundMusic.muted = false
+  }else if(musicButton.classList.contains('musicButton--off')){
+    backgroundMusic.muted = true
+  }
+}
+
 
 function toggleButton() {
   if (this.classList.contains(`${this.id}--on`)) {
@@ -26,7 +36,10 @@ function toggleButton() {
   const musicButton = document.getElementById('musicButton');
   sfxButton.addEventListener('click', toggleButton);
   musicButton.addEventListener('click', toggleButton);
+  musicButton.addEventListener('click',toggleMusic)
 })();
+
+
 
 
 (function renderSettingButton(){
