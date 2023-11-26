@@ -1,4 +1,3 @@
-
 import myAudio from '../../assets/audio/background-music.mp3';
 
 const audio = new Audio(myAudio);
