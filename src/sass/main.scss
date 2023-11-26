@@ -1,12 +1,14 @@
 @import './default.scss';
 @import './var.scss';
-@import './charSel.scss';
 @import './nav.scss';
 @import './settings.scss';
+@import './charSel.scss';
 
 
 body{
   background-image:linear-gradient( rgba(0,0,0,0.20), rgba(0,0,0,0.20)), url('../assets/images/bgImage.jpg');
   background-size: cover;
   position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr;
 }

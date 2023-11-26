@@ -1,0 +1,135 @@
+.charSelContainer{
+  z-index: 0;
+  grid-row: 2/3;
+  background-color: $navBg;
+  visibility: hidden;
+  &--visible{
+    @extend .charSelContainer;
+    visibility: visible;
+  }
+
+
+}
+
+
+.charSelPage{
+  width: 721px;
+  height: 573px;
+  border-radius: 35px;
+  background-color: #170E2E;
+  margin-top: 84px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  h1{
+    font-family: 'jotiOne';
+    font-size: 96px;
+    color: white;
+    align-self: center;
+  }
+  &__imageContainer{
+    display: flex;
+    margin-top: 10px;
+    justify-content: center;
+    gap: 56px;
+    &:has(.charSelPage__necoArc:hover) + div > .charSelPage__necoArcText::before{
+
+      width: 100%;
+    }
+
+    &:has(.charSelPage__necoArc) + div > .charSelPage__necoArcText::before{
+      width: 0;
+    }
+    &:has(.charSelPage__necoChaos:hover) + div > .charSelPage__necoChaosText::before{
+      width: 100%;
+    }
+    &:has(.charSelPage__necoChaos) + div > .charSelPage__necoChaosText::before{
+      width: 0;
+    }
+  }
+
+  &__necoArc{
+    @extend %soundButtons;
+    height: 270px;
+    width: 267px;
+    border-radius: 32px;
+    overflow: hidden;
+    &>span{
+      @extend %soundButtonsSpanElement;
+      background-image: url('../assets/images/necoArcCharSel.jpg')
+    }
+
+  }
+  
+  &__necoChaos{
+    @extend %soundButtons;
+    width: 258px;
+    height: 270px;
+    border-radius: 32px;
+    overflow: hidden;
+    
+    &>span{
+      @extend %soundButtonsSpanElement;
+      background-image: url('../assets/images/necoChaosCharSel.jpg')
+    }
+    & + div > .charSelPage__necoChaosText::before{
+      width: 100%;
+    }
+  }
+  
+  &__textContainer{
+    display: flex;
+    font-family: "jotiOne";
+    font-size: 48px;
+    color: white;
+    gap: 94px;
+
+  }
+  
+  &__necoArcText{
+    margin-left: 95px;
+    position: relative;
+    overflow: hidden;
+
+    &::before{
+      content: "Neco Arc";
+      overflow: hidden;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      width: 100%;
+      white-space: nowrap;
+      color: #D8D366;
+      transition: width .5s ease;
+      z-index: 1;
+
+    }
+    
+  }
+
+  &__necoChaosText{
+    margin-left: 15px;
+    position: relative;
+    overflow: hidden;
+
+    &::before{
+
+      content: "Neco Chaos";
+      overflow: hidden;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      width: 100%;
+      white-space: nowrap;
+      color: #5e39aeb6;
+      transition: width .5s ease;
+      z-index: 1;
+    }
+
+  }
+
+
+}
