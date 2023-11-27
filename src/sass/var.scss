@@ -37,9 +37,27 @@ $settingPageBg: #3B2772;
   src: url('../assets/fonts/JotiOne-Regular.ttf');
 }
 
+@font-face {
+  font-family: 'lemon';
+  src: url('../assets/fonts/Lemon-Regular.ttf');
+}
+
+
 %nameText{
   font-size: 128px;
   color: white;
   font-family: 'inika';
   text-shadow: 0px 4px  4px $shadowColor;
+}
+
+%placeShipButtons{
+  font-family: 'lemon';
+  padding-bottom: 3px;
+  font-size: 48px;
+  color: white;
+  border-radius: 9px;
+  border: 0px;
+  cursor: pointer;
+  box-shadow: 0px 4px 4px $shadowColor;
+
 }

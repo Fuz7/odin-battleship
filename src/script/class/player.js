@@ -1,10 +1,15 @@
 import Gameboard from './gameboard';
 
 export default class Player {
-  constructor(char) {
-    this.char = char;
+  constructor() {
+    this.char = null;
     this.gameboard = new Gameboard();
     this.opponent = null;
+
+  }
+
+  setCharacter(char){
+    this.char = char
   }
 
   setOpponent(opponent) {
@@ -29,3 +34,4 @@ export default class Player {
     }
   }
 }
+

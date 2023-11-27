@@ -1,16 +1,34 @@
 .charSelContainer{
-  z-index: 0;
-  grid-row: 2/3;
-  background-color: $navBg;
   visibility: hidden;
+  position: absolute;
+  top: 0px;
+  left: 0px;
   &--visible{
-    @extend .charSelContainer;
+    z-index: 0;
+    background-color: $navBg;
+    grid-row: 2/3;
     visibility: visible;
   }
 
 
 }
 
+@keyframes slideUp {
+  0%{
+    opacity: 1;
+  }
+  30%{
+    transform: translateY(150px);
+  }
+  70%{
+      transform: translateY(-250px);
+      opacity: 1;
+  }
+  100%{
+    transform: translateY(-800px);
+    opacity: 0;
+  }
+}
 
 .charSelPage{
   width: 721px;
@@ -24,6 +42,11 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
+
+  &.slideUp{
+    animation: slideUp 1s ease-out  1 forwards normal;
+  }
+
   h1{
     font-family: 'jotiOne';
     font-size: 96px;

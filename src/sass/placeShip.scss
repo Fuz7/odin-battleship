@@ -1,0 +1,117 @@
+.placeShipContainer{
+  visibility: hidden;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  &--visible{
+    grid-row: 2/3;
+    visibility: visible;
+  }
+}
+
+@keyframes slideDown {
+  0%{
+    transform: translateY(-1000px);
+    opacity: .8;
+  }
+  50%{
+    opacity: 1;
+  }
+  100%{
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+.placeShipPage{
+  width: 1267px;
+  height: 750px;
+  margin: 57px auto 0px;
+  background-color: #170E2E;
+  border-radius: 35px;
+  opacity: 0;
+  display: grid;
+  grid-template-columns: 584px 1fr;
+  &--slideDown{
+    @extend .placeShipPage;
+
+    animation: slideDown .5s ease .5s 1 normal forwards;
+
+  }
+  &--visible{
+    @extend .placeShipPage;
+    opacity: 1;
+  }
+
+  &__gridContainer{
+    grid-column: 1/2;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__shipContainer{
+    grid-column: 2/3;
+  }
+  
+  &__buttonContainer{
+    display: flex;
+    gap: 25px;
+  }
+  
+  &__resetButton{
+    @extend %placeShipButtons;
+    background-color: #963232;
+    width: 200px;
+    height: 60px;
+    margin-left: 54px;
+  }
+  
+  &__continueButton{
+    @extend %placeShipButtons;
+    background-color: #3E7E20;
+    width: 302px;
+    height: 60px;
+    color: white;
+    &--invalid{
+      @extend .placeShipPage__continueButton;
+      background-color: rgba($color: #3E7E20, $alpha: 0.4);
+      color: rgba($color: #ffffff, $alpha: .4);
+    }
+  }
+}
+
+
+
+.shipAxisButton{
+  @extend %placeShipButtons;
+  margin-top: 18px;
+  width: 269px;
+  align-self: center;
+  margin-left: 24px;
+  background-color: #275AA7;
+}
+
+.placeShipBoard{
+  width: 540px;
+  height: 540px;
+  margin-left: auto;
+  border-radius: 20px;
+  border: 20px solid #373592;
+  margin-top: 19px;
+  margin-bottom: 20px;
+  &__boardRow{
+    display: flex;
+  }
+  &__boardCell{
+    width: 50px;
+    height: 50px;
+    border: solid 1px;
+    background-color: #ABB5DC;
+    &:hover{
+      background-color: #7a819f;
+    }
+  }
+
+
+}
+
