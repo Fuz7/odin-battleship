@@ -51,6 +51,9 @@
 
   &__shipContainer{
     grid-column: 2/3;
+    padding-left: 33px;
+    display: flex;
+    flex-direction: column;
   }
   
   &__buttonContainer{
@@ -77,7 +80,28 @@
       background-color: rgba($color: #3E7E20, $alpha: 0.4);
       color: rgba($color: #ffffff, $alpha: .4);
     }
+
+    
   }
+  &__reshuffleButton{
+    @extend %placeShipButtons;
+    background-color: #951D6C;
+    width: 311px;
+    height: 60px;
+    cursor: pointer;
+    align-self: center;
+    margin-top: 26px;
+  }
+
+  &__title{
+    font-family: 'jotiOne';
+    font-size: 64px;
+    align-self: center;
+    color: white;
+    margin-top: 6px;
+  }
+
+
 }
 
 
@@ -115,3 +139,46 @@
 
 }
 
+
+.fleetContainer{
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  gap: 6px;
+  &__flexContainer{
+    display: flex;
+  }
+
+  &__shipLenght{
+    font-family: 'jotiOne';
+    font-size: 64px;
+    color: white;
+    margin-left: 25px;
+    &:first-of-type{
+      margin-top: 1px;
+    }
+  }
+
+  &__shipImage{
+    width: 100px;
+    height: 100px;
+    background-color: rgba(72, 42, 170, 0.64);
+    border-radius: 4px;
+  }
+  
+  &__shipName{
+    font-size: 48px;
+    font-family: 'jotiOne';
+    color: white;
+    background-color: #170E2E;
+    border: 0px;
+    height: 98px;
+    width: 400px;
+
+    text-decoration: underline solid;
+    text-underline-position: under;
+    margin-left: 39px;
+    padding-bottom: 20px;
+  }
+
+}
