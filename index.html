@@ -7,7 +7,7 @@
 <script defer src="main.js"></script><link href="styles.css" rel="stylesheet"></head>
 <body id="body">
   <nav>
-    <img src="./assets/images/logo.png" alt="NecoShip Logo" class="logo">
+    <img src="./assets/images/logo.png" alt="NecoShip Logo" draggable="false" class="logo">
     <button id="settingsButton" class="settingsButton" type="button"><span class="settingsLogo"></span></button>
   </nav>
   <div id="settingsContainer" class="settingsContainer">
@@ -31,43 +31,43 @@
     </div>
   
   </section>
-  <section id="placeShipContainer" class="placeShipContainer--visible">
-    <div id="placeShipPage" class="placeShipPage--visible">
-      <div class="placeShipPage__gridContainer">
-        <button id="shipAxisButton" class="shipAxisButton">X-Axis</button>
+  <section data-char="necoChaos" id="placeShipContainer" class="placeShipContainer--visible">
+    <div id="placeShipPage" class="placeShipPage--visible" draggable="false">
+      <div class="placeShipPage__gridContainer" draggable="false">
+        <button id="shipAxisButton" class="shipAxisButton" data-position="x-axis">X-Axis</button>
         <div id="placeShipBoard" class="placeShipBoard"></div>
         <div class="placeShipPage__buttonContainer">
           <button id="placeShipPage__resetButton" class="placeShipPage__resetButton">Reset</button>
           <button id="placeShipPage__continueButton" class="placeShipPage__continueButton">Continue</button>
         </div>
       </div>
-      <div class="placeShipPage__shipContainer">
+      <div class="placeShipPage__shipContainer" draggable="false">
         <h1 class="placeShipPage__title">Place Ship</h1>
         <div class="fleetContainer">
           <div class="fleetContainer__flexContainer">
-            <div class="fleetContainer__shipImage"></div>
+            <div class="fleetContainer__shipImage" data-lenght="5" tabindex="0"></div>
             <p class="fleetContainer__shipLenght">5</p>
-            <input class="fleetContainer__shipName" type="text" id="" value="Battleship">
+            <input class="fleetContainer__shipName" type="text" id="placeShip5" value="Battleship"  >
           </div>
-          <div class="fleetContainer__flexContainer">
-            <div class="fleetContainer__shipImage"></div>
+          <div class="fleetContainer__flexContainer" >
+            <div class="fleetContainer__shipImage" data-lenght="4" tabindex="0"></div>
             <p class="fleetContainer__shipLenght">4</p>
-            <input class="fleetContainer__shipName" type="text" id="" value="Carrier">
+            <input class="fleetContainer__shipName" type="text" id="placeShip4" value="Carrier">
           </div>
           <div class="fleetContainer__flexContainer">
-            <div class="fleetContainer__shipImage"></div>
+            <div class="fleetContainer__shipImage" data-lenght="3" tabindex="0"></div>
             <p class="fleetContainer__shipLenght">3</p>
-            <input class="fleetContainer__shipName" type="text" id="" value="Ship">
+            <input class="fleetContainer__shipName" type="text" id="placeShip3" value="Ship">
           </div>
           <div class="fleetContainer__flexContainer">
-            <div class="fleetContainer__shipImage"></div>
+            <div class="fleetContainer__shipImage"data-lenght="2" tabindex="0"></div>
             <p class="fleetContainer__shipLenght">2</p>
-            <input class="fleetContainer__shipName" type="text" id="" value="Boat">
+            <input class="fleetContainer__shipName" type="text" id="placeShip2" value="Boat">
           </div>
           <div class="fleetContainer__flexContainer">
-            <div class="fleetContainer__shipImage"></div>
+            <div class="fleetContainer__shipImage" data-lenght="1" tabindex="0"></div>
             <p class="fleetContainer__shipLenght">1</p>
-            <input class="fleetContainer__shipName" type="text" id="" value="Cat">
+            <input class="fleetContainer__shipName" type="text" id="placeShip1" value="Cat">
           </div>
         </div>
         <button class="placeShipPage__reshuffleButton">Reshuffle</button>
