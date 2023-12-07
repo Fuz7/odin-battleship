@@ -7,7 +7,10 @@ test('shipPlacement', () => {
   const gameboard1 = new Gameboard();
   gameboard1.placeShip(ship1);
   expect(gameboard1.ships).toContain(ship1);
+
 });
+
+
 
 test('shipsSunk', () => {
   const gameboard2 = new Gameboard();
@@ -57,3 +60,14 @@ test('missedHit', () => {
   player1.hitBoard([5, 5]);
   expect(player1.gameboard.missedAttacks).toContainEqual([3, 5], [5, 5]);
 });
+
+
+test ('checkValidity', ()=>{
+  const gameboard1 = new Gameboard()
+  const ship1 = new Ship(3,[[1,1],[2,0],[4,9]])
+  gameboard1.placeShip(ship1)
+  gameboard1.placeShip(new Ship(1,[[2,3]]))
+
+  expect(gameboard1.checkValidity([[2,3]])).toBe(false)
+  expect(gameboard1.checkValidity([[4,9]])).toBe(false)
+})

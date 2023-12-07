@@ -5,7 +5,10 @@ const necoChaos = {
   character: 'necoChaos',
   voice: {
     charSel :charSelAudioSrc
-  }
+  },
+
+  images:['iN1.jpg','iN2.jpg','iN3.jpg','iN4.jpg','iN5.jpg']
+
 
 }
 

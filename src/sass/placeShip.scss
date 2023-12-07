@@ -29,6 +29,7 @@
   margin: 57px auto 0px;
   background-color: #170E2E;
   border-radius: 35px;
+  user-select: none;
   opacity: 0;
   display: grid;
   grid-template-columns: 584px 1fr;
@@ -98,6 +99,7 @@
     font-size: 64px;
     align-self: center;
     color: white;
+    user-select: none;
     margin-top: 6px;
   }
 
@@ -139,12 +141,24 @@
 
 }
 
+.boardCell{
+  &--invalid{
+
+    background-color: #da2727;
+  }
+  &--valid{
+
+    background-color:#4652edeb;
+  }
+}
+
 
 .fleetContainer{
   display: flex;
   flex-direction: column;
   margin-top: 20px;
   gap: 6px;
+  user-select: none;
   &__flexContainer{
     display: flex;
   }
@@ -154,6 +168,7 @@
     font-size: 64px;
     color: white;
     margin-left: 25px;
+    user-select: none;
     &:first-of-type{
       margin-top: 1px;
     }
@@ -164,6 +179,17 @@
     height: 100px;
     background-color: rgba(72, 42, 170, 0.64);
     border-radius: 4px;
+
+    position: relative;
+    &--loaded{
+      @extend .fleetContainer__shipImage;
+      cursor: grab;
+      &:focus{
+        filter: brightness(.2);
+      }
+
+
+    }
   }
   
   &__shipName{
@@ -174,7 +200,7 @@
     border: 0px;
     height: 98px;
     width: 400px;
-
+    user-select: none;
     text-decoration: underline solid;
     text-underline-position: under;
     margin-left: 39px;
