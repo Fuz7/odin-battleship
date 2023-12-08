@@ -2,8 +2,9 @@ export default class Ship{
   constructor(lenght,coord){
     this.lenght = lenght;
     this.coord = coord;
-    this.alignment = 'vertical';
     this.life = lenght;
+    this.icon = null;
+
   }
 
   hit(){
@@ -19,3 +20,9 @@ export default class Ship{
   }
 }
 
+const placeShipObject = {
+  id: null,
+
+}
+
+export {placeShipObject}

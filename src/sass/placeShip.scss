@@ -39,6 +39,8 @@
     animation: slideDown .5s ease .5s 1 normal forwards;
 
   }
+
+  // Temporary
   &--visible{
     @extend .placeShipPage;
     opacity: 1;
@@ -150,6 +152,11 @@
 
     background-color:#4652edeb;
   }
+
+  &--placed{
+    background-size: contain;
+  }
+
 }
 
 
@@ -175,21 +182,29 @@
   }
 
   &__shipImage{
-    width: 100px;
-    height: 100px;
-    background-color: rgba(72, 42, 170, 0.64);
-    border-radius: 4px;
-
-    position: relative;
+    @extend %shipImageContainer;
     &--loaded{
       @extend .fleetContainer__shipImage;
       cursor: grab;
       &:focus{
-        filter: brightness(.2);
+        filter: brightness(.4);
       }
-
-
+      
+      
     }
+    
+    &--placed{
+      @extend %shipImageContainer;
+      background-image: none;
+      background-color: gray;
+      cursor: pointer;
+      
+      filter: brightness(.05);
+      &:focus{
+        filter: brightness(.05);
+      }
+    }
+  
   }
   
   &__shipName{

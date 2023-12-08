@@ -27,6 +27,16 @@ $settingPageBg: #3B2772;
   width: 100%;
 }
 
+%shipImageContainer{
+
+  width: 100px;
+  height: 100px;
+  background-color: rgba(72, 42, 170, 0.64);
+  border-radius: 4px;
+
+  position: relative;
+}
+
 @font-face {
   font-family: 'inika';
   src: url('../assets/fonts/Inika-Regular.ttf');
