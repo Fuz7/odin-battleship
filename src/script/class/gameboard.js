@@ -8,7 +8,11 @@ export default class Gameboard{
     this.ships.push(ship)
   }
 
-  
+
+  clearShip(){
+    this.ships = []
+  }
+
   checkValidity(coord){
     
     const valid = !(coord.find((pos) => {

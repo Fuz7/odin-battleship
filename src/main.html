@@ -31,14 +31,14 @@
     </div>
   
   </section>
-  <section data-char="necoChaos" id="placeShipContainer" class="placeShipContainer--visible">
+  <section data-char="necoArc" id="placeShipContainer" class="placeShipContainer--visible">
     <div id="placeShipPage" class="placeShipPage--visible" draggable="false">
       <div class="placeShipPage__gridContainer" draggable="false">
         <button id="shipAxisButton" class="shipAxisButton" data-position="x-axis">X-Axis</button>
         <div id="placeShipBoard" class="placeShipBoard"></div>
         <div class="placeShipPage__buttonContainer">
           <button id="placeShipPage__resetButton" class="placeShipPage__resetButton">Reset</button>
-          <button id="placeShipPage__continueButton" class="placeShipPage__continueButton">Continue</button>
+          <button id="placeShipPage__continueButton" class="placeShipPage__continueButton--invalid">Continue</button>
         </div>
       </div>
       <div class="placeShipPage__shipContainer" draggable="false">
@@ -70,7 +70,7 @@
             <input class="fleetContainer__shipName" type="text" id="placeShip1" value="Cat">
           </div>
         </div>
-        <button class="placeShipPage__reshuffleButton">Reshuffle</button>
+        <button id="placeShipPage__reshuffleButton" class="placeShipPage__reshuffleButton">Reshuffle</button>
       </div>
     </div>
 

@@ -1,11 +1,7 @@
 import '../sass/main.scss';
 import '../assets/images/logo.png';
 import './utils/music';
+import './utils/images'
 import './DOM/settings'
 import './DOM/charSel'
 import './DOM/placeShip'
-import '../assets/images/iN1.jpg'
-import '../assets/images/iN2.jpg'
-import '../assets/images/iN3.jpg'
-import '../assets/images/iN4.jpg'
-import '../assets/images/iN5.jpg'

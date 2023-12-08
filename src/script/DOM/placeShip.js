@@ -1,10 +1,10 @@
 /* eslint-disable no-param-reassign */
 import necoArc from '../class/necoArc';
 import necoChaos from '../class/necoChaos';
-import generateArrayCoordinates from '../utils/array';
+import generateArrayCoordinates, { randomizeArray } from '../utils/array';
 import Gameboard from '../class/gameboard';
 import Ship, {placeShipObject} from '../class/ship';
-import { player1,bot } from './charSel';
+import { player1 } from './charSel';
 
 function generateCellsColor(array,bool){
   array.forEach(element=>{
@@ -103,6 +103,7 @@ function renderBoardCell(boardId) {
         coordValidity = placeShipGameboard.checkValidity(twoDimensionalCoords)
         if(coordValidity === true){
           const ship =  new Ship(shipLenght,twoDimensionalCoords)
+          ship.icon = dragElement.getAttribute('data-image')
           removeCellsColor()
           player1.gameboard.placeShip(ship) 
           generateCellImage(twoDimensionalCoords,dragElement)
@@ -140,8 +141,56 @@ function renderBoardCell(boardId) {
 })();
 
 (function renderResetButton(){
-  
+  const resetButton = document.getElementById('placeShipPage__resetButton')
 
+  resetButton.addEventListener('click',()=>{
+    const placedCell = Array.from(document.getElementsByClassName('boardCell--placed'))
+    const draggedImages = Array.from(document.getElementsByClassName('fleetContainer__shipImage--placed'))
+    placedCell.forEach((cell)=>{
+      cell.style.backgroundImage = 'none';
+      cell.classList.remove('boardCell--placed')
+    })
+    player1.gameboard.clearShip()
+    draggedImages.forEach((shipImage)=>{
+      shipImage.setAttribute('draggable','true')
+      shipImage.classList.remove('fleetContainer__shipImage--placed')
+      shipImage.classList.add('fleetContainer__shipImage--loaded')
+    })
+  })
+
+})();
+
+
+
+
+(function renderReshuffleButton(){
+ 
+  player1.char = necoArc;
+  const reshuffleButton = document.getElementById('placeShipPage__reshuffleButton')
+  reshuffleButton.addEventListener('click',()=>{
+    const placedImages = Array.from(document.getElementsByClassName('fleetContainer__shipImage--placed'))
+    const loadedImages = Array.from(document.getElementsByClassName('fleetContainer__shipImage--loaded'))
+
+    const placedImagesArr = placedImages.map((element)=>{
+      const imageSrc = element.getAttribute('data-image')
+      return imageSrc
+    })
+
+    const arrWithoutPlacedImage = player1.char.images.filter((image)=>{
+      if(placedImagesArr.includes(image)) return false
+      return true
+    })
+    
+    const randomizedWithoutPlacedImage = randomizeArray(arrWithoutPlacedImage)
+
+    loadedImages.forEach((element,index)=>{
+      element.style.backgroundImage = `url('./assets/images/${randomizedWithoutPlacedImage[index]}')`
+      element.setAttribute('data-image',randomizedWithoutPlacedImage[index])
+    })
+
+  
+  
+  })
 
 })();
 
@@ -151,14 +200,15 @@ function renderFleetImage() {
   let character;
   if(selectedChar === 'necoChaos') character = necoChaos
   else if(selectedChar === 'necoArc') character = necoArc
+  const shuffledImage = randomizeArray(character.images)
 
   const fleetImages = Array.from(document.getElementsByClassName('fleetContainer__shipImage'))
   fleetImages.forEach((element,index)=>{
-    element.style.backgroundImage = `url('./assets/images/${character.images[index]}')`;
+    element.style.backgroundImage = `url('./assets/images/${shuffledImage[index]}')`;
     element.classList.remove('fleetContainer__shipImage')
     element.classList.add('fleetContainer__shipImage--loaded')
     element.setAttribute('draggable','true')
-    element.setAttribute('data-image',character.images[index])
+    element.setAttribute('data-image',shuffledImage[index])
     element.setAttribute('id',`placeShipImage${5 - index}`)
 
     element.addEventListener('dragstart',(ev)=>{

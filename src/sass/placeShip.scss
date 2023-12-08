@@ -74,14 +74,17 @@
   
   &__continueButton{
     @extend %placeShipButtons;
-    background-color: #3E7E20;
     width: 302px;
     height: 60px;
     color: white;
     &--invalid{
       @extend .placeShipPage__continueButton;
-      background-color: rgba($color: #3E7E20, $alpha: 0.4);
-      color: rgba($color: #ffffff, $alpha: .4);
+      background-color: rgba($color: #3E7E20, $alpha: 0.3);
+      color: rgba($color: #ffffff, $alpha: .3);
+    }
+    &--valid{
+      @extend .placeShipPage__continueButton;
+      background-color: #3E7E20;
     }
 
     
@@ -197,7 +200,7 @@
       @extend %shipImageContainer;
       background-image: none;
       background-color: gray;
-      cursor: pointer;
+      cursor: default;
       
       filter: brightness(.05);
       &:focus{
