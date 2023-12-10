@@ -1,0 +1,101 @@
+.mainGameContainer{
+ position: absolute;
+ top: 0px;
+ left: 0px; 
+ visibility: hidden;
+ &--visible{
+   grid-row: 2/3;
+   visibility: visible;
+  }
+}
+
+.mainGamePage{
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  &__boardContainer{
+    display: flex;
+    gap: 52px;
+
+  }
+
+  &__textBox{
+    width: 1119px;
+    height: 70px;
+    border-radius: 8px;
+    margin-left: 359px;
+    &--necoChaos#playerTextBox{
+      margin-top: 32px;
+      margin-bottom: 10px;
+      @extend .mainGamePage__textBox;
+      background-image: linear-gradient(90deg, rgba(94,57,174,1) 0%, rgba(45,63,126,1) 100%);
+      
+    }
+    &--necoArc#botTextBox{
+      @extend .mainGamePage__textBox;
+      background-image: linear-gradient(90deg, rgba(166,153,25,1) 0%, rgba(216,211,102,1) 100%);
+      
+    }
+    
+    &--necoArc#playerTextBox{
+      margin-top: 32px;
+      margin-bottom: 10px;
+      @extend .mainGamePage__textBox;
+      background-image: linear-gradient(90deg, rgba(216,211,102,1) 0%, rgba(161,149,32,1) 100%);
+    }
+    
+    &--necoChaos#botTextBox{
+      @extend .mainGamePage__textBox;
+      background-image: linear-gradient(90deg, rgba(45,63,126,1) 0%, rgba(107,67,191,1) 100%);
+    }
+    
+  }
+  
+}
+
+.boardContainer{
+  &__gameBoard--necoArc{
+    @extend %gameboard;
+    border-color: #5E39AE;
+    
+  }
+  &__gameBoard--necoChaos{
+    @extend %gameboard;
+    border-color: #A19520;
+  }
+}
+
+#playerGameboard{
+  margin-left: 351px;
+}
+
+.playerGameboard{
+  &__boardRow{
+    display: flex;
+  }
+  &__boardCell{
+    @extend %boardCell;
+
+    &:hover{
+      background-color: #7a819f;
+    }
+
+  }
+
+}
+
+.botGameboard{
+  &__boardRow{
+    display: flex;
+  }
+
+  &__boardCell{
+    @extend %boardCell;
+    background-color: #D4C3AA;
+    border-color: black;
+    &:hover{
+      background-color: #9d9282;
+    }
+  }
+
+}

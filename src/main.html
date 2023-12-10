@@ -17,7 +17,7 @@
       <button id="musicButton" class="musicButton--on" type="button"><span class=""></span></button>
     </div>
   </div>
-  <section id="charSelContainer" class="charSelContainer">
+  <section id="charSelContainer" class="charSelContainer  ">
     <div id="charSelPage" class="charSelPage">
       <h1>Select Char</h1>
       <div class="charSelPage__imageContainer">
@@ -31,8 +31,8 @@
     </div>
   
   </section>
-  <section data-char="necoArc" id="placeShipContainer" class="placeShipContainer--visible">
-    <div id="placeShipPage" class="placeShipPage--visible" draggable="false">
+  <section id="placeShipContainer" class="placeShipContainer">
+    <div id="placeShipPage" class="placeShipPage" draggable="false">
       <div class="placeShipPage__gridContainer" draggable="false">
         <button id="shipAxisButton" class="shipAxisButton" data-position="x-axis">X-Axis</button>
         <div id="placeShipBoard" class="placeShipBoard"></div>
@@ -74,6 +74,22 @@
       </div>
     </div>
 
+  </section>
+  <section id="mainGameContainer" class="mainGameContainer--visible">
+    <div id="mainGamePage" class="mainGamePage">
+      <div class="mainGamePage__boardContainer">
+        <div id="playerGameboard" class="boardContainer__gameBoard--necoArc">
+          
+        </div>
+        <div id="botGameboard" class="boardContainer__gameBoard--necoChaos">
+        </div>
+
+      </div>
+      <div id="playerTextBox" class="mainGamePage__textBox--necoArc">
+        
+      </div>
+      <div id="botTextBox" class="mainGamePage__textBox--necoChaos"></div>
+    </div>
   </section>
  
 </body>

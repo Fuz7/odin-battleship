@@ -1,6 +1,4 @@
 /* eslint-disable no-param-reassign */
-import necoArc from '../class/necoArc';
-import necoChaos from '../class/necoChaos';
 import generateArrayCoordinates, { randomizeArray } from '../utils/array';
 import Gameboard from '../class/gameboard';
 import Ship, {placeShipObject} from '../class/ship';
@@ -48,6 +46,18 @@ function toggleDraggable(dragElement){
   dragElement.classList.add('fleetContainer__shipImage--placed')
 }
 
+function toggleContinueButton(){
+  const continueButton = document.getElementById('placeShipPage__continueButton')
+
+  if(player1.gameboard.ships.length === 5){
+    continueButton.classList.remove('placeShipPage__continueButton--invalid')
+    continueButton.classList.add('placeShipPage__continueButton--valid')
+  }else{
+    continueButton.classList.remove('placeShipPage__continueButton--valid')
+    continueButton.classList.add('placeShipPage__continueButton--invalid')
+
+  }
+}
 
 
 function renderBoardCell(boardId) {
@@ -64,7 +74,7 @@ function renderBoardCell(boardId) {
       boardCell.setAttribute('data-cell', j);
       // eslint-disable-next-line prefer-arrow-callback, func-names
       let twoDimensionalCoords;
-      let coordValidity
+      let coordValidity;
       // eslint-disable-next-line func-names
       boardCell.addEventListener('dragenter',function(e){
         e.preventDefault();
@@ -112,6 +122,7 @@ function renderBoardCell(boardId) {
         }else{
           removeCellsColor()
         }
+        toggleContinueButton();
       })
 
 
@@ -156,16 +167,27 @@ function renderBoardCell(boardId) {
       shipImage.classList.remove('fleetContainer__shipImage--placed')
       shipImage.classList.add('fleetContainer__shipImage--loaded')
     })
+    toggleContinueButton()
   })
 
 })();
 
-
-
+(function renderContinueButton(){
+  const continueButton = document.getElementById('placeShipPage__continueButton')
+  const placeShipContainer = document.getElementById('placeShipPage')
+  const mainGameContainer = document.getElementById('mainGameContainer')
+  continueButton.addEventListener('click',()=>{
+    if(continueButton.classList.contains('placeShipPage__continueButton--valid')){
+      placeShipContainer.classList.remove('placeShipContainer--visible')
+      placeShipContainer.classList.add('placeShipContainer')
+      mainGameContainer.classList.add('mainGameContainer--visible')
+    }
+  })
+})();
+  
 
 (function renderReshuffleButton(){
  
-  player1.char = necoArc;
   const reshuffleButton = document.getElementById('placeShipPage__reshuffleButton')
   reshuffleButton.addEventListener('click',()=>{
     const placedImages = Array.from(document.getElementsByClassName('fleetContainer__shipImage--placed'))
@@ -195,33 +217,6 @@ function renderBoardCell(boardId) {
 })();
 
 
-function renderFleetImage() {
-  const selectedChar = document.getElementById('placeShipContainer').getAttribute('data-char')
-  let character;
-  if(selectedChar === 'necoChaos') character = necoChaos
-  else if(selectedChar === 'necoArc') character = necoArc
-  const shuffledImage = randomizeArray(character.images)
 
-  const fleetImages = Array.from(document.getElementsByClassName('fleetContainer__shipImage'))
-  fleetImages.forEach((element,index)=>{
-    element.style.backgroundImage = `url('./assets/images/${shuffledImage[index]}')`;
-    element.classList.remove('fleetContainer__shipImage')
-    element.classList.add('fleetContainer__shipImage--loaded')
-    element.setAttribute('draggable','true')
-    element.setAttribute('data-image',shuffledImage[index])
-    element.setAttribute('id',`placeShipImage${5 - index}`)
-
-    element.addEventListener('dragstart',(ev)=>{
-      placeShipObject.id = ev.target.id
-    })
-
-
-
-  })
-
-
-}
-
-renderFleetImage()
 
 renderBoardCell('placeShipBoard');

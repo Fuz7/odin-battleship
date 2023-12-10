@@ -123,26 +123,30 @@
 }
 
 .placeShipBoard{
-  width: 540px;
-  height: 540px;
+  @extend %gameboard;
   margin-left: auto;
-  border-radius: 20px;
-  border: 20px solid #373592;
+  border-color: #373592; 
   margin-top: 19px;
   margin-bottom: 20px;
   &__boardRow{
     display: flex;
   }
   &__boardCell{
-    width: 50px;
-    height: 50px;
-    border: solid 1px;
-    background-color: #ABB5DC;
+    @extend %boardCell;
     &:hover{
       background-color: #7a819f;
     }
   }
 
+  &--necoArc{
+    @extend .placeShipBoard;
+    border-color: #A69919;
+  }
+
+  &--necoChaos{
+    @extend .placeShipBoard;
+    border-color: #373592;
+  }
 
 }
 

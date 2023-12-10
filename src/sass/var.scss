@@ -10,6 +10,22 @@ $settingPageBg: #3B2772;
   outline-color: red;
 }
 
+%gameboard{
+  width: 544px;
+  height: 544px;
+  border-radius: 20px;
+  border-width: 20px;
+  border-style: solid;
+
+}
+
+%boardCell{
+  width: 51px;
+  height: 51px;
+  border: solid 1px;
+  background-color: #ABB5DC;
+}
+
 
 %soundButtons{
   border: 0px;

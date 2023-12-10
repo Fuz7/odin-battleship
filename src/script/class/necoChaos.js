@@ -2,7 +2,7 @@
 import charSelAudioSrc from '../../assets/audio/charSel__necoChaos.mp3'
 
 const necoChaos = {
-  character: 'necoChaos',
+  characterName: 'necoChaos',
   voice: {
     charSel :charSelAudioSrc
   },
