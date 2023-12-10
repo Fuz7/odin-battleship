@@ -17,7 +17,7 @@
       <button id="musicButton" class="musicButton--on" type="button"><span class=""></span></button>
     </div>
   </div>
-  <section id="charSelContainer" class="charSelContainer">
+  <section id="charSelContainer" class="charSelContainer  ">
     <div id="charSelPage" class="charSelPage">
       <h1>Select Char</h1>
       <div class="charSelPage__imageContainer">
@@ -31,14 +31,14 @@
     </div>
   
   </section>
-  <section data-char="necoChaos" id="placeShipContainer" class="placeShipContainer--visible">
-    <div id="placeShipPage" class="placeShipPage--visible" draggable="false">
+  <section id="placeShipContainer" class="placeShipContainer">
+    <div id="placeShipPage" class="placeShipPage" draggable="false">
       <div class="placeShipPage__gridContainer" draggable="false">
         <button id="shipAxisButton" class="shipAxisButton" data-position="x-axis">X-Axis</button>
         <div id="placeShipBoard" class="placeShipBoard"></div>
         <div class="placeShipPage__buttonContainer">
           <button id="placeShipPage__resetButton" class="placeShipPage__resetButton">Reset</button>
-          <button id="placeShipPage__continueButton" class="placeShipPage__continueButton">Continue</button>
+          <button id="placeShipPage__continueButton" class="placeShipPage__continueButton--invalid">Continue</button>
         </div>
       </div>
       <div class="placeShipPage__shipContainer" draggable="false">
@@ -70,10 +70,26 @@
             <input class="fleetContainer__shipName" type="text" id="placeShip1" value="Cat">
           </div>
         </div>
-        <button class="placeShipPage__reshuffleButton">Reshuffle</button>
+        <button id="placeShipPage__reshuffleButton" class="placeShipPage__reshuffleButton">Reshuffle</button>
       </div>
     </div>
 
+  </section>
+  <section id="mainGameContainer" class="mainGameContainer--visible">
+    <div id="mainGamePage" class="mainGamePage">
+      <div class="mainGamePage__boardContainer">
+        <div id="playerGameboard" class="boardContainer__gameBoard--necoArc">
+          
+        </div>
+        <div id="botGameboard" class="boardContainer__gameBoard--necoChaos">
+        </div>
+
+      </div>
+      <div id="playerTextBox" class="mainGamePage__textBox--necoArc">
+        
+      </div>
+      <div id="botTextBox" class="mainGamePage__textBox--necoChaos"></div>
+    </div>
   </section>
  
 </body>
