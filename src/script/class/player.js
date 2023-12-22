@@ -26,12 +26,14 @@ export default class Player {
           currCorrdinate[1] === coordinate[1],
       );
       if (shipCoordMark !== undefined) {
-        hitBool = ship.hit();
+        
+        hitBool = ship.hit(shipCoordMark);
       }
     });
     if (hitBool === false) {
       this.gameboard.missedAttacks.push(coordinate);
     }
+    return (!!hitBool)
   }
 }
 

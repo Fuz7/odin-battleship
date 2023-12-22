@@ -3,11 +3,13 @@ export default class Ship{
     this.lenght = lenght;
     this.coord = coord;
     this.life = lenght;
+    this.destroyed = [];
     this.icon = null;
 
   }
 
-  hit(){
+  hit(shotCoord){
+    this.destroyed.push(shotCoord)
     this.life -= 1;
     return true
   }

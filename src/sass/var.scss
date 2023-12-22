@@ -24,6 +24,10 @@ $settingPageBg: #3B2772;
   height: 51px;
   border: solid 1px;
   background-color: #ABB5DC;
+<<<<<<< Updated upstream
+=======
+  position: relative;
+>>>>>>> Stashed changes
 }
 
 
@@ -33,7 +37,7 @@ $settingPageBg: #3B2772;
   position: relative;
   background-color: transparent;
   cursor: pointer;
-}
+}  
 
 %soundButtonsSpanElement{
   position: absolute;
@@ -41,33 +45,7 @@ $settingPageBg: #3B2772;
   left: 0px;
   height: 100%;
   width: 100%;
-}
-
-%shipImageContainer{
-
-  width: 100px;
-  height: 100px;
-  background-color: rgba(72, 42, 170, 0.64);
-  border-radius: 4px;
-
-  position: relative;
-}
-
-@font-face {
-  font-family: 'inika';
-  src: url('../assets/fonts/Inika-Regular.ttf');
-}
-
-@font-face {
-  font-family: 'jotiOne';
-  src: url('../assets/fonts/JotiOne-Regular.ttf');
-}
-
-@font-face {
-  font-family: 'lemon';
-  src: url('../assets/fonts/Lemon-Regular.ttf');
-}
-
+}  
 
 %nameText{
   font-size: 128px;
@@ -87,4 +65,76 @@ $settingPageBg: #3B2772;
   cursor: pointer;
   box-shadow: 0px 4px 4px $shadowColor;
 
+}
+
+%textEffect{
+  position: relative;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 24px;
+  animation: blinking .7s ease  infinite alternate forwards ;
+
+}
+
+
+%shipImageContainer{
+
+  width: 100px;
+  height: 100px;
+  background-color: rgba(72, 42, 170, 0.64);
+  border-radius: 4px;
+
+  position: relative;
+}  
+
+@font-face {
+  font-family: 'inika';
+  src: url('../assets/fonts/Inika-Regular.ttf');
+}  
+
+@font-face {
+  font-family: 'jotiOne';
+  src: url('../assets/fonts/JotiOne-Regular.ttf');
+}  
+
+@font-face {
+  font-family: 'lemon';
+  src: url('../assets/fonts/Lemon-Regular.ttf');
+}  
+
+@font-face {
+  font-family: 'mclaren';
+  src: url('../assets/fonts/McLaren-Regular.ttf');
+}  
+
+@font-face {
+  font-family: 'frijole';
+  src: url('../assets/fonts/Frijole-Regular.ttf');
+}  
+
+@keyframes blinking {
+  0%{
+    opacity: 0;
+  }  
+
+  100%{
+
+    opacity: 1;
+  }  
+
+}  
+
+
+@keyframes necoAttack {
+
+  95%{
+    opacity: 1;
+  }
+  100%{
+    top: 0px;
+    left: 0px;
+    opacity: 0;
+    
+  }
 }

@@ -31,11 +31,12 @@
   border-radius: 35px;
   user-select: none;
   opacity: 0;
+  visibility: hidden;
   display: grid;
   grid-template-columns: 584px 1fr;
   &--slideDown{
     @extend .placeShipPage;
-
+    visibility: visible;
     animation: slideDown .5s ease .5s 1 normal forwards;
 
   }

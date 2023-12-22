@@ -2,7 +2,37 @@
 import generateArrayCoordinates, { randomizeArray } from '../utils/array';
 import Gameboard from '../class/gameboard';
 import Ship, {placeShipObject} from '../class/ship';
-import { player1 } from './charSel';
+import { game } from './charSel';
+import { generateOpponentGameboard } from '../utils/random';
+
+
+function renderPlayerCellImage(){
+  let cellImage;
+  game.player.gameboard.ships.forEach(ship => {
+    debugger
+    ship.coord.forEach((pos) =>{
+      cellImage = document.querySelector(`div[class="playerGameboard__boardCell"][data-cell="${pos[0]}"][data-row="${pos[1]}"]`)
+      cellImage.classList.add('boardCell__withImage')
+      cellImage.style.backgroundImage = `url('./assets/images/${ship.icon}')`
+    })
+  });
+
+}
+function renderBotCellImage(){
+  let cellImage;
+
+
+  game.bot.gameboard.ships.forEach(ship => {
+     
+
+    ship.coord.forEach((pos) =>{
+      cellImage = document.querySelector(`div[class="botGameboard__boardCell"][data-cell="${pos[0]}"][data-row="${pos[1]}"]`)
+      cellImage.classList.add('boardCell__withImage')
+      cellImage.style.backgroundImage = `url('./assets/images/${ship.icon}')`
+    })
+  });
+
+}
 
 function generateCellsColor(array,bool){
   array.forEach(element=>{
@@ -49,13 +79,20 @@ function toggleDraggable(dragElement){
 function toggleContinueButton(){
   const continueButton = document.getElementById('placeShipPage__continueButton')
 
+<<<<<<< Updated upstream
   if(player1.gameboard.ships.length === 5){
+=======
+  if(game.player.gameboard.ships.length === 5){
+>>>>>>> Stashed changes
     continueButton.classList.remove('placeShipPage__continueButton--invalid')
     continueButton.classList.add('placeShipPage__continueButton--valid')
   }else{
     continueButton.classList.remove('placeShipPage__continueButton--valid')
     continueButton.classList.add('placeShipPage__continueButton--invalid')
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
   }
 }
 
@@ -63,7 +100,7 @@ function toggleContinueButton(){
 function renderBoardCell(boardId) {
   const board = document.getElementById(boardId);
   const placeShipGameboard = new Gameboard()
-  player1.gameboard = placeShipGameboard;
+  game.player.gameboard = placeShipGameboard;
   for (let i = 9; i >= 0; i -= 1) {
     const boardRow = document.createElement('div');
     boardRow.classList.add(`${boardId}__boardRow`);
@@ -86,7 +123,7 @@ function renderBoardCell(boardId) {
         const axisButton = document.getElementById('shipAxisButton')
         const axis = axisButton.getAttribute('data-position')
         twoDimensionalCoords = generateArrayCoordinates(shipLenght,[x,y],axis)
-        coordValidity = player1.gameboard.checkValidity(twoDimensionalCoords)
+        coordValidity = game.player.gameboard.checkValidity(twoDimensionalCoords)
         
         
         
@@ -115,10 +152,10 @@ function renderBoardCell(boardId) {
           const ship =  new Ship(shipLenght,twoDimensionalCoords)
           ship.icon = dragElement.getAttribute('data-image')
           removeCellsColor()
-          player1.gameboard.placeShip(ship) 
+          game.player.gameboard.placeShip(ship) 
           generateCellImage(twoDimensionalCoords,dragElement)
           toggleDraggable(dragElement)
-          console.log(player1.gameboard.ships)
+          console.log(game.player.gameboard.ships)
         }else{
           removeCellsColor()
         }
@@ -161,7 +198,7 @@ function renderBoardCell(boardId) {
       cell.style.backgroundImage = 'none';
       cell.classList.remove('boardCell--placed')
     })
-    player1.gameboard.clearShip()
+    game.player.gameboard.clearShip()
     draggedImages.forEach((shipImage)=>{
       shipImage.setAttribute('draggable','true')
       shipImage.classList.remove('fleetContainer__shipImage--placed')
@@ -174,14 +211,43 @@ function renderBoardCell(boardId) {
 
 (function renderContinueButton(){
   const continueButton = document.getElementById('placeShipPage__continueButton')
+<<<<<<< Updated upstream
   const placeShipContainer = document.getElementById('placeShipPage')
   const mainGameContainer = document.getElementById('mainGameContainer')
+=======
+  const placeShipContainer = document.getElementById('placeShipContainer')
+  const placeShipPage = document.getElementById('placeShipPage')
+  const mainGameContainer = document.getElementById('mainGameContainer')
+  const playerGameboard = document.getElementById('playerGameboard')
+  const botGameboard = document.getElementById('botGameboard')
+  const playerTextBox = document.getElementById('playerTextBox')
+  const botTextBox = document.getElementById('botTextBox')
+>>>>>>> Stashed changes
   continueButton.addEventListener('click',()=>{
     if(continueButton.classList.contains('placeShipPage__continueButton--valid')){
       placeShipContainer.classList.remove('placeShipContainer--visible')
       placeShipContainer.classList.add('placeShipContainer')
+<<<<<<< Updated upstream
       mainGameContainer.classList.add('mainGameContainer--visible')
     }
+=======
+      placeShipPage.classList.remove('placeShipPage--slideDown')
+      placeShipPage.classList.add('placeShipPage')
+      mainGameContainer.classList.add('mainGameContainer--visible')
+      playerGameboard.classList.remove('boardContainer__gameBoard')
+      playerGameboard.classList.add(`boardContainer__gameBoard--${game.player.char.characterName}`)
+      botGameboard.classList.add(`boardContainer__gameBoard--${game.bot.char.characterName}`)
+      botGameboard.classList.remove('boardContainer__gameBoard')
+      playerTextBox.classList.remove('mainGamePage__textBox')
+      playerTextBox.classList.add(`mainGamePage__textBox--${game.player.char.characterName}`)
+      botTextBox.classList.remove('mainGamePage__textBox')
+      botTextBox.classList.add(`mainGamePage__textBox--${game.bot.char.characterName}`)
+      
+      renderPlayerCellImage()
+      generateOpponentGameboard()
+      renderBotCellImage()
+    } 
+>>>>>>> Stashed changes
   })
 })();
   
@@ -198,7 +264,7 @@ function renderBoardCell(boardId) {
       return imageSrc
     })
 
-    const arrWithoutPlacedImage = player1.char.images.filter((image)=>{
+    const arrWithoutPlacedImage = game.player.char.images.filter((image)=>{
       if(placedImagesArr.includes(image)) return false
       return true
     })
