@@ -11,7 +11,7 @@ export default class Ship{
   hit(shotCoord){
     this.destroyed.push(shotCoord)
     this.life -= 1;
-    return true
+    return this
   }
 
   isSunk(){

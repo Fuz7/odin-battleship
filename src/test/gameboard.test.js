@@ -46,8 +46,8 @@ test('playerHit', () => {
       [2, 4],
     ]),
   );
-  player1.hitBoard([3, 4]);
-  player1.hitBoard([2, 4]);
+  expect((player1.hitBoard([3, 4])).isSunk()).toBe(false);
+  expect(player1.hitBoard([2, 4]).isSunk()).toBe(true);
   expect(player2.gameboard.shipsSunk()).toBe(true);
 });
 

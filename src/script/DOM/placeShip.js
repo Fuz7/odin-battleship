@@ -9,7 +9,6 @@ import { generateOpponentGameboard } from '../utils/random';
 function renderPlayerCellImage(){
   let cellImage;
   game.player.gameboard.ships.forEach(ship => {
-    debugger
     ship.coord.forEach((pos) =>{
       cellImage = document.querySelector(`div[class="playerGameboard__boardCell"][data-cell="${pos[0]}"][data-row="${pos[1]}"]`)
       cellImage.classList.add('boardCell__withImage')
@@ -79,20 +78,12 @@ function toggleDraggable(dragElement){
 function toggleContinueButton(){
   const continueButton = document.getElementById('placeShipPage__continueButton')
 
-<<<<<<< Updated upstream
-  if(player1.gameboard.ships.length === 5){
-=======
   if(game.player.gameboard.ships.length === 5){
->>>>>>> Stashed changes
     continueButton.classList.remove('placeShipPage__continueButton--invalid')
     continueButton.classList.add('placeShipPage__continueButton--valid')
   }else{
     continueButton.classList.remove('placeShipPage__continueButton--valid')
     continueButton.classList.add('placeShipPage__continueButton--invalid')
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
   }
 }
 
@@ -211,10 +202,6 @@ function renderBoardCell(boardId) {
 
 (function renderContinueButton(){
   const continueButton = document.getElementById('placeShipPage__continueButton')
-<<<<<<< Updated upstream
-  const placeShipContainer = document.getElementById('placeShipPage')
-  const mainGameContainer = document.getElementById('mainGameContainer')
-=======
   const placeShipContainer = document.getElementById('placeShipContainer')
   const placeShipPage = document.getElementById('placeShipPage')
   const mainGameContainer = document.getElementById('mainGameContainer')
@@ -222,15 +209,10 @@ function renderBoardCell(boardId) {
   const botGameboard = document.getElementById('botGameboard')
   const playerTextBox = document.getElementById('playerTextBox')
   const botTextBox = document.getElementById('botTextBox')
->>>>>>> Stashed changes
   continueButton.addEventListener('click',()=>{
     if(continueButton.classList.contains('placeShipPage__continueButton--valid')){
       placeShipContainer.classList.remove('placeShipContainer--visible')
       placeShipContainer.classList.add('placeShipContainer')
-<<<<<<< Updated upstream
-      mainGameContainer.classList.add('mainGameContainer--visible')
-    }
-=======
       placeShipPage.classList.remove('placeShipPage--slideDown')
       placeShipPage.classList.add('placeShipPage')
       mainGameContainer.classList.add('mainGameContainer--visible')
@@ -247,7 +229,6 @@ function renderBoardCell(boardId) {
       generateOpponentGameboard()
       renderBotCellImage()
     } 
->>>>>>> Stashed changes
   })
 })();
   

@@ -18,7 +18,7 @@ export default class Player {
 
   hitBoard(coordinate) {
     const { ships } = this.opponent.gameboard;
-    let hitBool = false;
+    let shipGotHit = false;
     ships.forEach((ship) => {
       const shipCoordMark = ship.coord.find(
         (currCorrdinate) =>
@@ -27,13 +27,13 @@ export default class Player {
       );
       if (shipCoordMark !== undefined) {
         
-        hitBool = ship.hit(shipCoordMark);
+        shipGotHit = ship.hit(shipCoordMark);
       }
     });
-    if (hitBool === false) {
+    if (shipGotHit === false) {
       this.gameboard.missedAttacks.push(coordinate);
     }
-    return (!!hitBool)
+    return (shipGotHit)
   }
 }
 
