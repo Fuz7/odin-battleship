@@ -24,22 +24,11 @@
     height: 70px;
     border-radius: 8px;
     margin-left: 359px;
-<<<<<<< Updated upstream
-    &--necoChaos#playerTextBox{
-      margin-top: 32px;
-      margin-bottom: 10px;
-      @extend .mainGamePage__textBox;
-      background-image: linear-gradient(90deg, rgba(94,57,174,1) 0%, rgba(45,63,126,1) 100%);
-      
-    }
-    &--necoArc#botTextBox{
-      @extend .mainGamePage__textBox;
-      background-image: linear-gradient(90deg, rgba(166,153,25,1) 0%, rgba(216,211,102,1) 100%);
-=======
     display: flex;
     font-family: 'mclaren';
     font-size: 24px;
     align-items: center;
+    box-shadow: 0px 4px 4px $shadowColor;
     &>span#botIcon{
       margin-left: 14px;
     }
@@ -73,26 +62,11 @@
         height: 45px;
       }
       
->>>>>>> Stashed changes
       
     }
     
     &--necoArc#playerTextBox{
       margin-top: 32px;
-<<<<<<< Updated upstream
-      margin-bottom: 10px;
-      @extend .mainGamePage__textBox;
-      background-image: linear-gradient(90deg, rgba(216,211,102,1) 0%, rgba(161,149,32,1) 100%);
-    }
-    
-    &--necoChaos#botTextBox{
-      @extend .mainGamePage__textBox;
-      background-image: linear-gradient(90deg, rgba(45,63,126,1) 0%, rgba(107,67,191,1) 100%);
-    }
-    
-  }
-  
-=======
       color: black;
       margin-bottom: 10px;
       padding-left: 8px;
@@ -136,70 +110,31 @@
 }
 
 
-
-#botText{
-  margin-left: auto
->>>>>>> Stashed changes
+#botTextBox{
+  & > .blinkingBar{
+    margin-left: auto;
+    left: 0px;
+  }
 }
 
 .boardContainer{
   &__gameBoard--necoArc{
     @extend %gameboard;
-<<<<<<< Updated upstream
-    border-color: #5E39AE;
-=======
     border-color: #A19520;
->>>>>>> Stashed changes
     
   }
   &__gameBoard--necoChaos{
     @extend %gameboard;
-<<<<<<< Updated upstream
-    border-color: #A19520;
-  }
-=======
     border-color: #5E39AE;
   }
 
   
->>>>>>> Stashed changes
 }
 
 #playerGameboard{
   margin-left: 351px;
 }
 
-<<<<<<< Updated upstream
-.playerGameboard{
-  &__boardRow{
-    display: flex;
-  }
-  &__boardCell{
-    @extend %boardCell;
-
-    &:hover{
-      background-color: #7a819f;
-    }
-
-  }
-
-}
-
-.botGameboard{
-  &__boardRow{
-    display: flex;
-  }
-
-  &__boardCell{
-    @extend %boardCell;
-    background-color: #D4C3AA;
-    border-color: black;
-    &:hover{
-      background-color: #9d9282;
-    }
-  }
-
-=======
 .boardContainer__gameBoard--necoChaos > .playerGameboard{
   &__boardRow{
     display: flex;
@@ -207,47 +142,16 @@
     & .playerGameboard__boardCell{
       @extend %boardCell;
   
-      &:hover{
+      &:hover:not(.boardCell--attacked){
         background-color: #7a819f;
       }
       
       &.boardCell--attacked{
         position: relative;
-        &::after{
-          position: absolute;
-          content: "X";
-          top: 0px;
-          left: 0px;
-          font-size: 30px;
-          color: #ccc824;
-          background-color: rgba(0, 0, 0, 0.275);
-          width: 100%;
-          height: 100%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          font-family: 'frijole';
+        cursor: default;
+        &:hover{
+          background-color: inherit
         }
-      }
-      &.boardCell__withImage{
-        background-size: cover;
-      }
-    }
-  }
-  
-}
-.boardContainer__gameBoard--necoChaos > .botGameboard{
-  &__boardRow{
-    display: flex;
-    
-    & .botGameboard__boardCell{
-      @extend %boardCell;
-      cursor: crosshair;
-      &:hover{
-        background-color: #7a819f;
-      }
-      &.boardCell--attacked{
-        position: relative;
         &::after{
           position: absolute;
           content: "X";
@@ -276,8 +180,58 @@
         width: 69px;
         height: 34px;
         background-image: url('../assets/images/arcAttack.gif');
-        transform: rotate(45deg);
-        animation: necoAttack .50s cubic-bezier(0, 0.43, 0.99, 0.26) 1 normal forwards;
+        animation: necoAttack .70s cubic-bezier(0, 0.43, 0.99, 0.26) 1 normal forwards;
+      }
+    }
+  }
+  
+}
+.boardContainer__gameBoard--necoChaos > .botGameboard{
+  &__boardRow{
+    display: flex;
+    
+    & .botGameboard__boardCell{
+      @extend %boardCell;
+      cursor: crosshair;
+      &:hover:not(.boardCell--attacked){
+        background-color: #7a819f;
+      }
+      &.boardCell--attacked{
+        position: relative;
+        cursor: default;
+ 
+        &::after{
+          position: absolute;
+          content: "X";
+          top: 0px;
+          left: 0px;
+          font-size: 30px;
+          color: #ccc824;
+          background-color: rgba(0, 0, 0, 0.275);
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-family: 'frijole';
+          :hover{
+            background-color: #ABB5dc;
+          }
+        }
+      }
+      &.boardCell__withImage{
+        background-size: cover;
+      }
+      &.animating > span{
+        content: '';
+        position: absolute;
+        top: -200px;
+        left: -250px;
+        z-index: 1;
+        width: 69px;
+        height: 34px;
+        background-image: url('../assets/images/arcAttack.gif');
+        animation: necoAttack .70s cubic-bezier(0, 0.43, 0.99, 0.26) 1 normal forwards;
       }
 
     }
@@ -295,11 +249,13 @@
       cursor: crosshair;
       background-color: #D4C3AA;
       border-color: black;
-      &:hover{
+      &:hover:not(.boardCell--attacked){
         background-color: #9d9282;
       }
       &.boardCell--attacked{
+        cursor: default;
         position: relative;
+ 
         &::after{
           position: absolute;
           content: "X";
@@ -320,6 +276,18 @@
         background-size: cover;
         
       }
+
+      &.animating > span{
+        content: '';
+        position: absolute;
+        top: -200px;
+        left: -250px;
+        z-index: 1;
+        width: 69px;
+        height: 34px;
+        background-image: url('../assets/images/chaosAttack.gif');
+        animation: necoAttack .70s cubic-bezier(0, 0.43, 0.99, 0.26) 1 normal forwards;
+      }
       
       
     }
@@ -335,11 +303,15 @@
       @extend %boardCell;
       background-color: #D4C3AA;
       border-color: black;
-      &:hover{
+      &:hover:not(.boardCell--attacked){
         background-color: #9d9282;
       }
       &.boardCell--attacked{
+        cursor: default;
         position: relative;
+        &:hover{
+          background-color: rgba(0, 0, 0, 0.475);
+        }
         &::after{
           position: absolute;
           content: "X";
@@ -359,21 +331,21 @@
       &.boardCell__withImage{
         background-size: cover;
       }
-      &.animating::before{
+      &.animating > span{
         content: '';
         position: absolute;
-        top: 0px;
-        left: 0px;
+        top: -200px;
+        left: -250px;
+        z-index: 1;
         width: 69px;
         height: 34px;
         background-image: url('../assets/images/chaosAttack.gif');
-        transform: rotate(45deg);
-        animation: necoAttack .50s cubic-bezier(0, 0, 0.92, 0.46) 1 normal forwards;
+        animation: necoAttack .70s cubic-bezier(0, 0.43, 0.99, 0.26) 1 normal forwards;
       }
+     
     }
   }
 
 
 
->>>>>>> Stashed changes
 }

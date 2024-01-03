@@ -5,20 +5,33 @@ export default class Player {
     this.char = null;
     this.gameboard = new Gameboard();
     this.opponent = null;
-
   }
 
-  setCharacter(char){
-    this.char = char
+  setCharacter(char) {
+    this.char = char;
   }
 
   setOpponent(opponent) {
     this.opponent = opponent;
   }
 
+  checkHitValidity(coordinate) {
+    const { missedAttacks } = this.gameboard;
+    const existingCoord = !!(missedAttacks.find(
+      (missedCoord) =>
+        missedCoord[0] === coordinate[0] && missedCoord[1] === coordinate[1],
+    ));
+    
+    if(existingCoord === true){
+      return false
+    }
+    return true
+
+  }
+
   hitBoard(coordinate) {
     const { ships } = this.opponent.gameboard;
-    let hitBool = false;
+    let shipGotHit = false;
     ships.forEach((ship) => {
       const shipCoordMark = ship.coord.find(
         (currCorrdinate) =>
@@ -26,14 +39,12 @@ export default class Player {
           currCorrdinate[1] === coordinate[1],
       );
       if (shipCoordMark !== undefined) {
-        
-        hitBool = ship.hit(shipCoordMark);
+        shipGotHit = ship.hit(shipCoordMark);
       }
     });
-    if (hitBool === false) {
+    if (shipGotHit === false) {
       this.gameboard.missedAttacks.push(coordinate);
     }
-    return (!!hitBool)
+    return shipGotHit;
   }
 }
-

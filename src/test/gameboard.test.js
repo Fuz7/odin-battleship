@@ -46,8 +46,8 @@ test('playerHit', () => {
       [2, 4],
     ]),
   );
-  player1.hitBoard([3, 4]);
-  player1.hitBoard([2, 4]);
+  expect((player1.hitBoard([3, 4])).isSunk()).toBe(false);
+  expect(player1.hitBoard([2, 4]).isSunk()).toBe(true);
   expect(player2.gameboard.shipsSunk()).toBe(true);
 });
 
@@ -59,6 +59,9 @@ test('missedHit', () => {
   player1.hitBoard([3, 5]);
   player1.hitBoard([5, 5]);
   expect(player1.gameboard.missedAttacks).toContainEqual([3, 5], [5, 5]);
+  expect(player1.checkHitValidity([3,5])).toBe(false)
+  player1.hitBoard([4,5])
+  expect(player1.checkHitValidity([4,5])).toBe(false)
 });
 
 
@@ -71,3 +74,5 @@ test ('checkValidity', ()=>{
   expect(gameboard1.checkValidity([[2,3]])).toBe(false)
   expect(gameboard1.checkValidity([[4,9]])).toBe(false)
 })
+
+
