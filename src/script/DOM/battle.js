@@ -87,6 +87,10 @@ function generateTextAnimation(textBox,message){
           game.state = ''
           if(shipGotHit instanceof Ship){
             game.player.char.voice.shipHit.play()
+            generateTextAnimation('playerText','Mwahaha! Prepare to be ship-wrecked, Neco-Arc!').then(()=>
+            generateTextAnimation('botText','Not before I turn your fleet into fish food, Neco Chaos!')
+
+            )
           }else{
             game.player.char.voice.boardHit.play()
           }
