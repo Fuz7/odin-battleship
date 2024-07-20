@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -17,7 +17,7 @@
       <button id="musicButton" class="musicButton--on" type="button"><span class=""></span></button>
     </div>
   </div>
-  <section id="charSelContainer" class="charSelContainer  ">
+  <section id="charSelContainer" class="charSelContainer--visible">
     <div id="charSelPage" class="charSelPage">
       <h1>Select Char</h1>
       <div class="charSelPage__imageContainer">
@@ -75,20 +75,27 @@
     </div>
 
   </section>
-  <section id="mainGameContainer" class="mainGameContainer--visible">
+  <section id="mainGameContainer" class="mainGameContainer">
     <div id="mainGamePage" class="mainGamePage">
       <div class="mainGamePage__boardContainer">
-        <div id="playerGameboard" class="boardContainer__gameBoard--necoArc">
+        <div id="playerGameboard" class="boardContainer__gameBoard">
           
         </div>
-        <div id="botGameboard" class="boardContainer__gameBoard--necoChaos">
+        <div id="botGameboard" class="boardContainer__gameBoard">
+        
         </div>
 
       </div>
-      <div id="playerTextBox" class="mainGamePage__textBox--necoArc">
-        
+      <div id="playerTextBox" class="mainGamePage__textBox">
+        <span id="playerIcon"></span> 
+         <p id="playerText">...</p> 
+         <div class="blinkingBar"></div>
       </div>
-      <div id="botTextBox" class="mainGamePage__textBox--necoChaos"></div>
+      <div id="botTextBox" class="mainGamePage__textBox">
+        <div class="blinkingBar"></div>
+        <p id="botText">...</p>
+        <span id="botIcon"></span>
+      </div>
     </div>
   </section>
  
