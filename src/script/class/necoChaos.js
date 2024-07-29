@@ -8,7 +8,7 @@ import chaosTaunt from '../../assets/audio/chaosTaunt.mp3'
 import chaosShipDestoryed from '../../assets/audio/chaosShipDestroyed.mp3'
 import shipHits from '../../assets/audio/shipHit.mp3'
 import boardHits from '../../assets/audio/boardHit.mp3'
-
+import letsRockk from '../../assets/audio/letsRock.mp3'
 
 const necoChaos = {
   characterName: 'necoChaos',
@@ -20,6 +20,7 @@ const necoChaos = {
     shipDestroyed: chaosShipDestoryed,
     shipHit: shipHits,
     boardHit: boardHits,
+    letsRock: letsRockk,
   },
 
   images:['iN1.jpg','iN2.jpg','iN3.jpg','iN4.jpg','iN5.jpg','iN6.jpg','iN7.jpg','iN8.jpg','iN9.jpg',

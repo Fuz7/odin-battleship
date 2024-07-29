@@ -2,29 +2,25 @@
 import Ship from '../class/ship';
 import convertCorrespondingAngle from '../utils/angle';
 import generateRandomPosition from '../utils/random';
-import { game,  } from './charSel';
+import { game } from './charSel';
 
-
-function generateTextAnimation(textBox,message){
+function generateTextAnimation(textBox, message) {
   const textBoxElement = document.getElementById(textBox);
   const typeDelay = 20;
   let charIndex = 0;
   textBoxElement.textContent = '';
-  return new Promise((resolve)=>{
-
-    function type(){
-      if(charIndex < message.length){
-        textBoxElement.textContent += message.charAt(charIndex)
-        charIndex+= 1
-        setTimeout(type,typeDelay)
-      }else if(charIndex === message.length){
-        resolve('doneTyping')
+  return new Promise((resolve) => {
+    function type() {
+      if (charIndex < message.length) {
+        textBoxElement.textContent += message.charAt(charIndex);
+        charIndex += 1;
+        setTimeout(type, typeDelay);
+      } else if (charIndex === message.length) {
+        resolve('doneTyping');
       }
-
     }
-    type()
-  })
-
+    type();
+  });
 }
 
 (function renderPlayerBoard() {
@@ -57,47 +53,46 @@ function generateTextAnimation(textBox,message){
       boardCell.setAttribute('data-row', i);
 
       boardCell.addEventListener('click', (e) => {
-        if(e.target.classList.contains('boardCell--attacked') !== true&& game.state !=='animating'){        
-        let topPos; 
-        let leftPos;
-        game.state = 'animating'
-        const spanElement = document.createElement('span');
-        do {
-          topPos = generateRandomPosition();
-          leftPos = generateRandomPosition();
-        } while (Math.abs(topPos) <= 50 && Math.abs(leftPos <= 50));
-        const angle = convertCorrespondingAngle(topPos, leftPos);
-        e.target.classList.add('animating');
-       
-        boardCell.append(spanElement);
-        const  attackSoundEffect = game.player.char.voice.attacks[Math.floor(Math.random() * 4)]
-        spanElement.style.transform = `rotate(${angle}deg)`;
-        spanElement.style.top = topPos + 'px';
-        spanElement.style.left = leftPos + 'px';
-        
-        console.log(attackSoundEffect.played.length)
-        attackSoundEffect.play()
-        const xPos = parseInt(e.target.getAttribute('data-cell'),10)
-        const yPos = parseInt(e.target.getAttribute('data-row'),10)
-        const shipGotHit = game.player.hitBoard([xPos,yPos])
-  
-        e.target.addEventListener('animationend', () => {
-          e.target.classList.add('boardCell--attacked');
-          spanElement.remove();
-          game.state = ''
-          if(shipGotHit instanceof Ship){
-            game.player.char.voice.shipHit.play()
-            generateTextAnimation('playerText','Mwahaha! Prepare to be ship-wrecked, Neco-Arc!').then(()=>
-            generateTextAnimation('botText','Not before I turn your fleet into fish food, Neco Chaos!')
+        if (
+          e.target.classList.contains('boardCell--attacked') !== true &&
+          game.state !== 'animating'
+          && game.turn === 'player'
+        ) {
+          let topPos;
+          let leftPos;
+          game.state = 'animating';
+          const spanElement = document.createElement('span');
+          do {
+            topPos = generateRandomPosition();
+            leftPos = generateRandomPosition();
+          } while (Math.abs(topPos) <= 50 && Math.abs(leftPos <= 50));
+          const angle = convertCorrespondingAngle(topPos, leftPos);
+          e.target.classList.add('animating');
 
-            )
-          }else{
-            game.player.char.voice.boardHit.play()
-          }
-        });
-        
+          boardCell.append(spanElement);
+          const attackSoundEffect =
+            game.player.char.voice.attacks[Math.floor(Math.random() * 4)];
+          spanElement.style.transform = `rotate(${angle}deg)`;
+          spanElement.style.top = topPos + 'px';
+          spanElement.style.left = leftPos + 'px';
 
-      }
+          console.log(attackSoundEffect.played.length);
+          attackSoundEffect.play();
+          const xPos = parseInt(e.target.getAttribute('data-cell'), 10);
+          const yPos = parseInt(e.target.getAttribute('data-row'), 10);
+          const shipGotHit = game.player.hitBoard([xPos, yPos]);
+
+          e.target.addEventListener('animationend', () => {
+            e.target.classList.add('boardCell--attacked');
+            spanElement.remove();
+            game.state = '';
+            if (shipGotHit instanceof Ship) {
+              game.player.char.voice.shipHit.play();
+            } else {
+              game.player.char.voice.boardHit.play();
+            }
+          });
+        }
       });
 
       boardRow.append(boardCell);
@@ -105,3 +100,22 @@ function generateTextAnimation(textBox,message){
     botBoard.append(boardRow);
   }
 })();
+
+function renderAttackingPlayer(){
+  const playerTextbox = document.getElementById('playerTextBox');
+  const botTextBox = document.getElementById('botTextBox')
+  if(game.turn === 'player'){
+    playerTextbox.classList.add('attacking')
+    botTextBox.classList.remove('attacking')
+  }else if(game.turn ==='bot'){
+    botTextBox.classList.add('attacking')
+    playerTextbox.classList.remove('attacking')
+  }else{
+    playerTextbox.classList.remove('attacking')
+    botTextBox.classList.remove('attacking')
+
+  }
+}
+
+
+export{renderAttackingPlayer,generateTextAnimation} ;

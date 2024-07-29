@@ -8,6 +8,7 @@ import arcTaunt from '../../assets/audio/arcTaunt.mp3'
 import arcShipDestoryed from '../../assets/audio/arcShipDestroyed.mp3'
 import shipHits from '../../assets/audio/shipHit.mp3'
 import boardHits from '../../assets/audio/boardHit.mp3'
+import letsRockk from '../../assets/audio/letsRock.mp3'
 
 const necoArc = {
   characterName : 'necoArc',
@@ -19,6 +20,7 @@ const necoArc = {
     shipDestroyed: arcShipDestoryed,
     shipHit: shipHits,
     boardHit: boardHits,
+    letsRock: letsRockk,
   },
   
   images:['iNA1.jpg','iNA2.jpg','iNA3.jpg','iNA4.jpg','iNA5.jpg','iNA6.jpg','iNA7.jpg','iNA8.jpg','iNA9.jpg',

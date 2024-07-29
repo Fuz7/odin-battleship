@@ -3,16 +3,32 @@
  top: 0px;
  left: 0px; 
  visibility: hidden;
+ width: 100%;
  &--visible{
    grid-row: 2/3;
    visibility: visible;
   }
 }
 
+.letsRock{
+  visibility:  hidden;
+  position: absolute;
+  object-fit: contain;
+  pointer-events: none;
+  width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+
+}
+
 .mainGamePage{
   margin-top: 18px;
   display: flex;
   flex-direction: column;
+  position: relative;
   &__boardContainer{
     display: flex;
     gap: 52px;
