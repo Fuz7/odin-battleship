@@ -18,7 +18,7 @@
     gap: 52px;
 
   }
-
+   
   &__textBox{
     width: 1119px;
     height: 70px;
@@ -49,6 +49,9 @@
         width: 60px;
         height: 60px;
       }
+      &.attacking{
+        border: 3px solid #22C912;
+      }
     }
     &--necoArc#botTextBox{
       padding-right: 8px;
@@ -62,6 +65,9 @@
         height: 45px;
       }
       
+      &.attacking{
+        border: 3px solid #22C912;
+      }
       
     }
     
@@ -77,6 +83,9 @@
         width: 60px;
         height: 45px;
       }
+      &.attacking{
+        border: 3px solid #22C912;
+      }
     }
     
     &--necoChaos#botTextBox{
@@ -91,6 +100,9 @@
         height: 60px;
       }
       
+      &.attacking{
+        border: 3px solid #22C912;
+      }
       
       
     }
@@ -107,6 +119,7 @@
 
     
   }  
+
 }
 
 

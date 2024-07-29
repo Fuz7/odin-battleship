@@ -18,21 +18,21 @@ function renderPlayerCellImage(){
   });
 
 }
-function renderBotCellImage(){
-  let cellImage;
+// function renderBotCellImage(){
+//   let cellImage;
 
 
-  game.bot.gameboard.ships.forEach(ship => {
+//   game.bot.gameboard.ships.forEach(ship => {
      
 
-    ship.coord.forEach((pos) =>{
-      cellImage = document.querySelector(`div[class="botGameboard__boardCell"][data-cell="${pos[0]}"][data-row="${pos[1]}"]`)
-      cellImage.classList.add('boardCell__withImage')
-      cellImage.style.backgroundImage = `url('./assets/images/${ship.icon}')`
-    })
-  });
+//     ship.coord.forEach((pos) =>{
+//       cellImage = document.querySelector(`div[class="botGameboard__boardCell"][data-cell="${pos[0]}"][data-row="${pos[1]}"]`)
+//       cellImage.classList.add('boardCell__withImage')
+//       cellImage.style.backgroundImage = `url('./assets/images/${ship.icon}')`
+//     })
+//   });
 
-}
+// }
 
 function generateCellsColor(array,bool){
   array.forEach(element=>{
@@ -228,7 +228,8 @@ function renderBoardCell(boardId) {
       
       renderPlayerCellImage()
       generateOpponentGameboard()
-      renderBotCellImage()
+      
+      // renderBotCellImage()
     } 
   })
 })();
