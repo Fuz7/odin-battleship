@@ -54,11 +54,14 @@ test('playerHit', () => {
 test('missedHit', () => {
   const player1 = new Player('arc');
   const player2 = new Player('roose');
+  const ship1 = new Ship(2,[[3,5],[4,7]])
+  player2.gameboard.placeShip(ship1)
   player1.setOpponent(player2);
   player2.setOpponent(player1);
   player1.hitBoard([3, 5]);
   player1.hitBoard([5, 5]);
-  expect(player1.gameboard.missedAttacks).toContainEqual([3, 5], [5, 5]);
+  player1.hitBoard([6,7])
+  expect(player1.gameboard.missedAttacks).toEqual([[5,5], [6,7  ]]);
   expect(player1.checkHitValidity([3,5])).toBe(false)
   player1.hitBoard([4,5])
   expect(player1.checkHitValidity([4,5])).toBe(false)

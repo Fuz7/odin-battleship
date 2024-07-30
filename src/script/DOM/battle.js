@@ -3,6 +3,8 @@ import Ship from '../class/ship';
 import convertCorrespondingAngle from '../utils/angle';
 import generateRandomPosition from '../utils/random';
 import { game } from './charSel';
+import '../utils/images';
+import { attackRandomly } from '../utils/attack';
 
 function generateTextAnimation(textBox, message) {
   const textBoxElement = document.getElementById(textBox);
@@ -39,6 +41,28 @@ function generateTextAnimation(textBox, message) {
     playerBoard.append(boardRow);
   }
 })();
+
+function renderAttackingPlayer(){
+  const playerTextbox = document.getElementById('playerTextBox');
+  const botTextBox = document.getElementById('botTextBox')
+  if(game.turn === 'player'){
+    playerTextbox.classList.add('attacking')
+    botTextBox.classList.remove('attacking')
+  }else if(game.turn ==='bot'){
+    botTextBox.classList.add('attacking')
+    playerTextbox.classList.remove('attacking')
+  }else{
+    playerTextbox.classList.remove('attacking')
+    botTextBox.classList.remove('attacking')
+
+  }
+}
+
+function attackPlayerBoard(){
+  if(game.turn === 'bot' && game.bot.hitState === null){
+      attackRandomly()
+  }
+}
 
 (function renderBotBoard() {
   const botBoard = document.getElementById('botGameboard');
@@ -87,9 +111,13 @@ function generateTextAnimation(textBox, message) {
             spanElement.remove();
             game.state = '';
             if (shipGotHit instanceof Ship) {
+              e.target.classList.add('boardCell__withImage')
+              e.target.style.backgroundImage = `url('./assets/images/${shipGotHit.icon}`
               game.player.char.voice.shipHit.play();
             } else {
               game.player.char.voice.boardHit.play();
+              game.turn = 'bot'
+              renderAttackingPlayer();
             }
           });
         }
@@ -101,21 +129,6 @@ function generateTextAnimation(textBox, message) {
   }
 })();
 
-function renderAttackingPlayer(){
-  const playerTextbox = document.getElementById('playerTextBox');
-  const botTextBox = document.getElementById('botTextBox')
-  if(game.turn === 'player'){
-    playerTextbox.classList.add('attacking')
-    botTextBox.classList.remove('attacking')
-  }else if(game.turn ==='bot'){
-    botTextBox.classList.add('attacking')
-    playerTextbox.classList.remove('attacking')
-  }else{
-    playerTextbox.classList.remove('attacking')
-    botTextBox.classList.remove('attacking')
-
-  }
-}
 
 
 export{renderAttackingPlayer,generateTextAnimation} ;
