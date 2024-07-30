@@ -4,7 +4,7 @@ import convertCorrespondingAngle from '../utils/angle';
 import generateRandomPosition from '../utils/random';
 import { game } from './charSel';
 import '../utils/images';
-import { attackRandomly } from '../utils/attack';
+import { attackRandomly, renderAttackingPlayer } from '../utils/attack';
 
 function generateTextAnimation(textBox, message) {
   const textBoxElement = document.getElementById(textBox);
@@ -42,24 +42,10 @@ function generateTextAnimation(textBox, message) {
   }
 })();
 
-function renderAttackingPlayer(){
-  const playerTextbox = document.getElementById('playerTextBox');
-  const botTextBox = document.getElementById('botTextBox')
-  if(game.turn === 'player'){
-    playerTextbox.classList.add('attacking')
-    botTextBox.classList.remove('attacking')
-  }else if(game.turn ==='bot'){
-    botTextBox.classList.add('attacking')
-    playerTextbox.classList.remove('attacking')
-  }else{
-    playerTextbox.classList.remove('attacking')
-    botTextBox.classList.remove('attacking')
 
-  }
-}
 
 function attackPlayerBoard(){
-  if(game.turn === 'bot' && game.bot.hitState === null){
+  if(game.turn === 'bot' && game.bot.hitState === null && game.state !== 'animating'){
       attackRandomly()
   }
 }
@@ -118,6 +104,7 @@ function attackPlayerBoard(){
               game.player.char.voice.boardHit.play();
               game.turn = 'bot'
               renderAttackingPlayer();
+              attackPlayerBoard()
             }
           });
         }
@@ -131,4 +118,4 @@ function attackPlayerBoard(){
 
 
 
-export{renderAttackingPlayer,generateTextAnimation} ;
+export{generateTextAnimation} ;

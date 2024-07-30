@@ -18,31 +18,31 @@ export default class Player {
     this.opponent = opponent;
   }
 
-  resetMissedAttackCounter(){
+  resetMissedAttackCounter() {
     this.missedCounter = 0;
   }
 
   checkHitValidity(coordinate) {
     const { missedAttacks } = this.gameboard;
-    const opponentShips = this.opponent.gameboard.ships
+    const opponentShips = this.opponent.gameboard.ships;
     let shipGotHitBool = false;
-    const existingCoord = !!(missedAttacks.find(
+    const existingCoord = !!missedAttacks.find(
       (missedCoord) =>
         missedCoord[0] === coordinate[0] && missedCoord[1] === coordinate[1],
-    ));
+    );
 
-    opponentShips.forEach((ship)=>{
-        shipGotHitBool = !!(ship.destroyed.find((destroyedCoord)=>
-        destroyedCoord[0] === coordinate[0]&& destroyedCoord[1] === coordinate[1]
-      ))
+
+    shipGotHitBool = opponentShips.some((ship) => 
+      ship.destroyed.some(
+        (destroyedCoord) =>
+          destroyedCoord[0] === coordinate[0] &&
+          destroyedCoord[1] === coordinate[1],
+      )
+    );
+    if (existingCoord === true || shipGotHitBool === true) {
+      return false;
     }
-  )
-
-    if(existingCoord === true || shipGotHitBool === true){
-      return false
-    }
-    return true
-
+    return true;
   }
 
   hitBoard(coordinate) {

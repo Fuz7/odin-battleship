@@ -4,7 +4,9 @@ import Gameboard from '../class/gameboard';
 import Ship, { placeShipObject } from '../class/ship';
 import { game } from './charSel';
 import { generateOpponentGameboard } from '../utils/random';
-import {renderAttackingPlayer,generateTextAnimation} from './battle';
+import {generateTextAnimation} from './battle';
+import { renderAttackingPlayer } from '../utils/attack';
+
 
 function renderPlayerCellImage() {
   let cellImage;
