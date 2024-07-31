@@ -99,6 +99,8 @@ function removeCharSelContainerVisibility(){
       })
       console.log(game.player)
       console.log(game.bot)
+      console.log(game.player.char.voice.charSel)
+      console.log(game.player.char.voice.attacks[0])
     }
   })
   

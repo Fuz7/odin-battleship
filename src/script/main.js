@@ -1,5 +1,6 @@
 import '../sass/main.scss';
 import '../assets/images/logo.png';
+import '../assets/images/letsRock.gif'
 import './utils/music';
 import './utils/images'
 import './DOM/settings'

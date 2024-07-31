@@ -3,9 +3,10 @@ class Game{
     this.player = null;
     this.bot = null;
     this.turn = null;
+    this.state = null
   }
 
-  
+    
 
 
 

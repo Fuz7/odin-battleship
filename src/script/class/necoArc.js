@@ -8,6 +8,7 @@ import arcTaunt from '../../assets/audio/arcTaunt.mp3'
 import arcShipDestoryed from '../../assets/audio/arcShipDestroyed.mp3'
 import shipHits from '../../assets/audio/shipHit.mp3'
 import boardHits from '../../assets/audio/boardHit.mp3'
+import letsRockk from '../../assets/audio/letsRock.mp3'
 
 const necoArc = {
   characterName : 'necoArc',
@@ -19,13 +20,17 @@ const necoArc = {
     shipDestroyed: arcShipDestoryed,
     shipHit: shipHits,
     boardHit: boardHits,
+    letsRock: letsRockk,
   },
   
   images:['iNA1.jpg','iNA2.jpg','iNA3.jpg','iNA4.jpg','iNA5.jpg','iNA6.jpg','iNA7.jpg','iNA8.jpg','iNA9.jpg',
 'iNA10.jpg','iNA11.jpg','iNA12.jpg','iNA13.jpg','iNA14.jpg','iNA15.jpg','iNA16.jpg','iNA17.jpg','iNA18.jpg','iNA19.jpg',
 'iNA20.jpg','iNA21.jpg','iNA22.jpg','iNA23.jpg','iNA24.jpg','iNA25.jpg','iNA26.jpg'
-]
-
+],
+  message:{
+    userIntro:'Nyaa~! Ready to get clobbered, Neco Chaos?',
+    enemyIntro:' Not before I turn your fleet into fish food, Neco Chaos!',
+  },
 }
 
 
@@ -34,7 +39,8 @@ Object.keys(necoArc.voice).forEach((key) =>{
     const attacks = key
     necoArc.voice[attacks].forEach((attack,index) => {
       const audio = new Audio(necoArc.voice[attack])
-      necoArc.voice[attacks][index] = audio
+      audio.src = attack
+      necoArc.voice.attacks[index] = audio
     });
   }else{
     const audio = new Audio(necoArc.voice[key])

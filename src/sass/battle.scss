@@ -3,22 +3,38 @@
  top: 0px;
  left: 0px; 
  visibility: hidden;
+ width: 100%;
  &--visible{
    grid-row: 2/3;
    visibility: visible;
   }
 }
 
+.letsRock{
+  visibility:  hidden;
+  position: absolute;
+  object-fit: contain;
+  pointer-events: none;
+  width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+
+}
+
 .mainGamePage{
   margin-top: 18px;
   display: flex;
   flex-direction: column;
+  position: relative;
   &__boardContainer{
     display: flex;
     gap: 52px;
 
   }
-
+   
   &__textBox{
     width: 1119px;
     height: 70px;
@@ -49,6 +65,9 @@
         width: 60px;
         height: 60px;
       }
+      &.attacking{
+        border: 3px solid #22C912;
+      }
     }
     &--necoArc#botTextBox{
       padding-right: 8px;
@@ -62,6 +81,9 @@
         height: 45px;
       }
       
+      &.attacking{
+        border: 3px solid #22C912;
+      }
       
     }
     
@@ -77,6 +99,9 @@
         width: 60px;
         height: 45px;
       }
+      &.attacking{
+        border: 3px solid #22C912;
+      }
     }
     
     &--necoChaos#botTextBox{
@@ -91,6 +116,9 @@
         height: 60px;
       }
       
+      &.attacking{
+        border: 3px solid #22C912;
+      }
       
       
     }
@@ -107,6 +135,7 @@
 
     
   }  
+
 }
 
 
