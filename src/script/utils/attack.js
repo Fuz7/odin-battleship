@@ -1,31 +1,35 @@
+/* eslint-disable no-use-before-define */
 import { game } from '../DOM/charSel';
 import convertCorrespondingAngle from './angle';
 import generateRandomPosition from './random';
-import { clearText, generateShipSunkLines, generateTextAnimation } from './voiceLines';
+import {
+  clearText,
+  generateShipSunkLines,
+  generateTextAnimation,
+} from './voiceLines';
 
-function renderAttackingPlayer(){
-  const playerTextbox = document.getElementById('playerTextBox');
-  const botTextBox = document.getElementById('botTextBox')
-  if(game.turn === 'player'){
-    playerTextbox.classList.add('attacking')
-    botTextBox.classList.remove('attacking')
-  }else if(game.turn ==='bot'){
-    botTextBox.classList.add('attacking')
-    playerTextbox.classList.remove('attacking')
-  }else{
-    playerTextbox.classList.remove('attacking')
-    botTextBox.classList.remove('attacking')
-
-  }
+function delayThenClearText(millisecond) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      clearText();
+      resolve();
+    }, millisecond);
+  });
 }
 
-function delayThenClearText(millisecond){
-  return new Promise((resolve)=>{
-    setTimeout(() => {
-      clearText()
-      resolve()
-    }, millisecond);
-  })
+function renderAttackingPlayer() {
+  const playerTextbox = document.getElementById('playerTextBox');
+  const botTextBox = document.getElementById('botTextBox');
+  if (game.turn === 'player') {
+    playerTextbox.classList.add('attacking');
+    botTextBox.classList.remove('attacking');
+  } else if (game.turn === 'bot') {
+    botTextBox.classList.add('attacking');
+    playerTextbox.classList.remove('attacking');
+  } else {
+    playerTextbox.classList.remove('attacking');
+    botTextBox.classList.remove('attacking');
+  }
 }
 
 function attackRandomly() {
@@ -33,7 +37,7 @@ function attackRandomly() {
   const y = Math.floor(Math.random() * 10);
   if (game.bot.checkHitValidity([x, y]) === true) {
     const attackedShip = game.bot.hitBoard([x, y]);
-    console.log(attackedShip?? 'its Null')
+    console.log(attackedShip ?? 'its Null');
     const boardCell = document.querySelector(
       `.playerGameboard__boardCell[data-cell="${x}"][data-row="${y}"]`,
     );
@@ -56,57 +60,321 @@ function attackRandomly() {
     spanElement.style.left = `${leftPos}px`;
 
     attackSoundEffect.play();
-    boardCell.addEventListener('animationend',()=>{
-      boardCell.classList.add('boardCell--attacked')
+    boardCell.addEventListener('animationend', () => {
+      boardCell.classList.add('boardCell--attacked');
       spanElement.remove();
       game.state = '';
-      if(attackedShip === null){
-        game.player.char.voice.boardHit.play()
+      if (attackedShip === null) {
+        game.player.char.voice.boardHit.play();
         game.turn = 'player';
-        renderAttackingPlayer()
-        
-      }
-      else if (attackedShip.isSunk() === true) {
+        renderAttackingPlayer();
+      } else if (attackedShip.isSunk() === true) {
         game.bot.hitState = null;
         game.bot.recentlyHitShip = null;
-        boardCell.classList.add('boardCell__withImage')
-        boardCell.style.backgroundImage = `url('./assets/images/${attackedShip.icon}`
-        game.player.char.voice.shipHit.play()
-        renderAttackingPlayer()
-        const sunkShipLine = generateShipSunkLines(game.player.char,attackedShip.shipName)
-        generateTextAnimation('playerText',sunkShipLine).then(()=>{
-          delayThenClearText(1500).then(()=>{
-              setTimeout(() => {
-                attackRandomly()
-              }, 1500);
-          })
-        })
-        
-      
-    } else if (attackedShip instanceof Object) {
-      game.bot.hitState = null;
-      game.bot.recentlyHitShip = attackedShip;
-      boardCell.classList.add('boardCell__withImage')
-      boardCell.style.backgroundImage = `url('./assets/images/${attackedShip.icon}`
-      game.player.char.voice.shipHit.play()
-      renderAttackingPlayer()
-      setTimeout(() => {
-      attackRandomly()
-        
-      }, 400);
-    }
-
-    })
-    
+        boardCell.classList.add('boardCell__withImage');
+        boardCell.style.backgroundImage = `url('./assets/images/${attackedShip.icon}`;
+        game.player.char.voice.shipHit.play();
+        renderAttackingPlayer();
+        const sunkShipLine = generateShipSunkLines(
+          game.player.char,
+          attackedShip.shipName,
+        );
+        generateTextAnimation('playerText', sunkShipLine).then(() => {
+          delayThenClearText(1500).then(() => {
+            setTimeout(() => {
+              attackPlayerBoard();
+            }, 1500);
+          });
+        });
+      } else if (attackedShip instanceof Object) {
+        game.bot.hitState = 'attacking';
+        game.bot.recentlyHitShip = attackedShip;
+        boardCell.classList.add('boardCell__withImage');
+        boardCell.style.backgroundImage = `url('./assets/images/${attackedShip.icon}`;
+        game.player.char.voice.shipHit.play();
+        renderAttackingPlayer();
+        setTimeout(() => {
+          attackPlayerBoard();
+        }, 400);
+      }
+    });
   } else if (game.bot.checkHitValidity([x, y]) !== true) {
-    console.log('hell Nah')
-    attackRandomly();
+    console.log('hell Nah');
+    attackPlayerBoard();
   }
-  return [x, y];
+}
+
+function attackAdjacent() {
+  const x = game.bot.recentlyHitShip.destroyed[0][0];
+  const y = game.bot.recentlyHitShip.destroyed[0][1];
+  const adjacentPositions = [
+    [x + 1, y],
+    [x - 1, y],
+    [x, y + 1],
+    [x, y - 1],
+  ];
+  const randomNumber = Math.floor(Math.random() * 4);
+  const chosenCoord = adjacentPositions[randomNumber];
+  if (game.bot.checkHitValidity([chosenCoord[0], chosenCoord[1]]) === true) {
+    const attackedShip = game.bot.hitBoard([chosenCoord[0], chosenCoord[1]]);
+    const boardCell = document.querySelector(
+      `.playerGameboard__boardCell[data-cell="${chosenCoord[0]}"][data-row="${chosenCoord[1]}"]`,
+    );
+    let topPos;
+    let leftPos;
+    game.state = 'animating';
+    const spanElement = document.createElement('span');
+    do {
+      topPos = generateRandomPosition();
+      leftPos = generateRandomPosition();
+    } while (Math.abs(topPos) <= 50 && Math.abs(leftPos <= 50));
+    const angle = convertCorrespondingAngle(topPos, leftPos);
+    boardCell.classList.add('animating');
+
+    boardCell.append(spanElement);
+    const attackSoundEffect =
+      game.bot.char.voice.attacks[Math.floor(Math.random() * 4)];
+    spanElement.style.transform = `rotate(${angle}deg)`;
+    spanElement.style.top = `${topPos}px`;
+    spanElement.style.left = `${leftPos}px`;
+
+    attackSoundEffect.play();
+    boardCell.addEventListener('animationend', () => {
+      boardCell.classList.add('boardCell--attacked');
+      spanElement.remove();
+      game.state = '';
+      if (attackedShip === null) {
+        game.player.char.voice.boardHit.play();
+        game.turn = 'player';
+        renderAttackingPlayer();
+      } else if (attackedShip.isSunk() === true) {
+        game.bot.hitState = null;
+        game.bot.recentlyHitShip = null;
+        boardCell.classList.add('boardCell__withImage');
+        boardCell.style.backgroundImage = `url('./assets/images/${attackedShip.icon}`;
+        game.player.char.voice.shipHit.play();
+        renderAttackingPlayer();
+        const sunkShipLine = generateShipSunkLines(
+          game.player.char,
+          attackedShip.shipName,
+        );
+        generateTextAnimation('playerText', sunkShipLine).then(() => {
+          delayThenClearText(1500).then(() => {
+            setTimeout(() => {
+              attackPlayerBoard();
+            }, 1500);
+          });
+        });
+      } else if (attackedShip instanceof Object) {
+        game.bot.hitState = 'attacking';
+        game.bot.recentlyHitShip = attackedShip;
+        boardCell.classList.add('boardCell__withImage');
+        boardCell.style.backgroundImage = `url('./assets/images/${attackedShip.icon}`;
+        game.player.char.voice.shipHit.play();
+        renderAttackingPlayer();
+        setTimeout(() => {
+          attackPlayerBoard();
+        }, 400);
+      }
+    });
+  } else if (
+    game.bot.checkHitValidity([chosenCoord[0], chosenCoord[1]]) !== true
+  ) {
+    attackPlayerBoard();
+  }
+}
+
+function attackInParallel() {
+  const destroyedCoords = game.bot.recentlyHitShip.destroyed;
+  if (destroyedCoords[0][0] - destroyedCoords[1][0] !== 0) {
+    const sortedXArray = destroyedCoords.sort((a, b) => a[0] - b[0]);
+    const leastValue = sortedXArray[0][0];
+    const biggestValue = sortedXArray[sortedXArray.length - 1][0];
+    const possibleCoords = [
+      [leastValue - 1, sortedXArray[0][1]],
+      [biggestValue + 1, sortedXArray[sortedXArray.length - 1][1]],
+    ];
+    const randomNumber = Math.floor(Math.random() * 2);
+    const chosenCoord = possibleCoords[randomNumber];
+    if (game.bot.checkHitValidity([chosenCoord[0], chosenCoord[1]]) === true) {
+      const attackedShip = game.bot.hitBoard([chosenCoord[0], chosenCoord[1]]);
+      const boardCell = document.querySelector(
+        `.playerGameboard__boardCell[data-cell="${chosenCoord[0]}"][data-row="${chosenCoord[1]}"]`,
+      );
+      let topPos;
+      let leftPos;
+      game.state = 'animating';
+      const spanElement = document.createElement('span');
+      do {
+        topPos = generateRandomPosition();
+        leftPos = generateRandomPosition();
+      } while (Math.abs(topPos) <= 50 && Math.abs(leftPos <= 50));
+      const angle = convertCorrespondingAngle(topPos, leftPos);
+      boardCell.classList.add('animating');
+
+      boardCell.append(spanElement);
+      const attackSoundEffect =
+        game.bot.char.voice.attacks[Math.floor(Math.random() * 4)];
+      spanElement.style.transform = `rotate(${angle}deg)`;
+      spanElement.style.top = `${topPos}px`;
+      spanElement.style.left = `${leftPos}px`;
+
+      attackSoundEffect.play();
+      boardCell.addEventListener('animationend', () => {
+        boardCell.classList.add('boardCell--attacked');
+        spanElement.remove();
+        game.state = '';
+        if (attackedShip === null) {
+          game.player.char.voice.boardHit.play();
+          game.turn = 'player';
+          renderAttackingPlayer();
+        } else if (attackedShip.isSunk() === true) {
+          game.bot.hitState = null;
+          game.bot.recentlyHitShip = null;
+          boardCell.classList.add('boardCell__withImage');
+          boardCell.style.backgroundImage = `url('./assets/images/${attackedShip.icon}`;
+          game.player.char.voice.shipHit.play();
+          renderAttackingPlayer();
+          const sunkShipLine = generateShipSunkLines(
+            game.player.char,
+            attackedShip.shipName,
+          );
+          generateTextAnimation('playerText', sunkShipLine).then(() => {
+            delayThenClearText(1500).then(() => {
+              setTimeout(() => {
+                attackPlayerBoard();
+              }, 1500);
+            });
+          });
+        } else if (attackedShip instanceof Object) {
+          game.bot.hitState = 'attacking';
+          game.bot.recentlyHitShip = attackedShip;
+          boardCell.classList.add('boardCell__withImage');
+          boardCell.style.backgroundImage = `url('./assets/images/${attackedShip.icon}`;
+          game.player.char.voice.shipHit.play();
+          renderAttackingPlayer();
+          setTimeout(() => {
+            attackPlayerBoard();
+          }, 400);
+        }
+      });
+    } else if (
+      game.bot.checkHitValidity([chosenCoord[0], chosenCoord[1]]) !== true
+    ) {
+      attackPlayerBoard();
+    }
+  } else if (destroyedCoords[0][1] - destroyedCoords[1][1] !== 0) {
+    const sortedYArray = destroyedCoords.sort((a, b) => a[1] - b[1]);
+    const leastValue = sortedYArray[0][1];
+    const biggestValue = sortedYArray[sortedYArray.length - 1][1];
+    const possibleCoords = [
+      [sortedYArray[0][0], leastValue - 1],
+      [sortedYArray[sortedYArray.length - 1][0], biggestValue + 1],
+    ];
+    const randomNumber = Math.floor(Math.random() * 2);
+    const chosenCoord = possibleCoords[randomNumber];
+    if (game.bot.checkHitValidity([chosenCoord[0], chosenCoord[1]]) === true) {
+      const attackedShip = game.bot.hitBoard([chosenCoord[0], chosenCoord[1]]);
+      const boardCell = document.querySelector(
+        `.playerGameboard__boardCell[data-cell="${chosenCoord[0]}"][data-row="${chosenCoord[1]}"]`,
+      );
+      let topPos;
+      let leftPos;
+      game.state = 'animating';
+      const spanElement = document.createElement('span');
+      do {
+        topPos = generateRandomPosition();
+        leftPos = generateRandomPosition();
+      } while (Math.abs(topPos) <= 50 && Math.abs(leftPos <= 50));
+      const angle = convertCorrespondingAngle(topPos, leftPos);
+      boardCell.classList.add('animating');
+
+      boardCell.append(spanElement);
+      const attackSoundEffect =
+        game.bot.char.voice.attacks[Math.floor(Math.random() * 4)];
+      spanElement.style.transform = `rotate(${angle}deg)`;
+      spanElement.style.top = `${topPos}px`;
+      spanElement.style.left = `${leftPos}px`;
+
+      attackSoundEffect.play();
+      boardCell.addEventListener('animationend', () => {
+        boardCell.classList.add('boardCell--attacked');
+        spanElement.remove();
+        game.state = '';
+        if (attackedShip === null) {
+          game.player.char.voice.boardHit.play();
+          game.turn = 'player';
+          renderAttackingPlayer();
+        } else if (attackedShip.isSunk() === true) {
+          game.bot.hitState = null;
+          game.bot.recentlyHitShip = null;
+          boardCell.classList.add('boardCell__withImage');
+          boardCell.style.backgroundImage = `url('./assets/images/${attackedShip.icon}`;
+          game.player.char.voice.shipHit.play();
+          renderAttackingPlayer();
+          const sunkShipLine = generateShipSunkLines(
+            game.player.char,
+            attackedShip.shipName,
+          );
+          generateTextAnimation('playerText', sunkShipLine).then(() => {
+            delayThenClearText(1500).then(() => {
+              setTimeout(() => {
+                attackPlayerBoard();
+              }, 1500);
+            });
+          });
+        } else if (attackedShip instanceof Object) {
+          game.bot.hitState = 'attacking';
+          game.bot.recentlyHitShip = attackedShip;
+          boardCell.classList.add('boardCell__withImage');
+          boardCell.style.backgroundImage = `url('./assets/images/${attackedShip.icon}`;
+          game.player.char.voice.shipHit.play();
+          renderAttackingPlayer();
+          setTimeout(() => {
+            attackPlayerBoard();
+          }, 400);
+        }
+      });
+    } else if (
+      game.bot.checkHitValidity([chosenCoord[0], chosenCoord[1]]) !== true
+    ) {
+      attackPlayerBoard();
+    }
+  }
+}
+
+function attackPlayerBoard() {
+  if (
+    game.turn === 'bot' &&
+    game.state !== 'animating' &&
+    game.bot.hitState == null
+  ) {
+    attackRandomly();
+  } else if (
+    game.turn === 'bot' &&
+    game.state !== 'animating' &&
+    game.bot.hitState === 'attacking' &&
+    game.bot.recentlyHitShip.destroyed.length === 1
+  ) {
+    attackAdjacent();
+  } else if (
+    game.turn === 'bot' &&
+    game.state !== 'animating' &&
+    game.bot.hitState === 'attacking' &&
+    game.bot.recentlyHitShip.destroyed.length > 1
+  ) {
+    attackInParallel();
+  }
 }
 
 function generateAdjacentAttack(coord) {
   return coord;
 }
 
-export { renderAttackingPlayer,attackRandomly, generateAdjacentAttack, };
+export {
+  renderAttackingPlayer,
+  attackRandomly,
+  generateAdjacentAttack,
+  attackAdjacent,
+  attackPlayerBoard,
+};

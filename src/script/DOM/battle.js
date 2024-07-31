@@ -4,7 +4,7 @@ import convertCorrespondingAngle from '../utils/angle';
 import generateRandomPosition from '../utils/random';
 import { game } from './charSel';
 import '../utils/images';
-import { attackRandomly, renderAttackingPlayer } from '../utils/attack';
+import { attackPlayerBoard, renderAttackingPlayer } from '../utils/attack';
 
 (function renderPlayerBoard() {
   const playerBoard = document.getElementById('playerGameboard');
@@ -23,14 +23,6 @@ import { attackRandomly, renderAttackingPlayer } from '../utils/attack';
   }
 })();
 
-
-
-function attackPlayerBoard(){
-  if(game.turn === 'bot' && game.bot.hitState === null && game.state !== 'animating'){
-      attackRandomly()
-  }
-}
-
 (function renderBotBoard() {
   const botBoard = document.getElementById('botGameboard');
 
@@ -46,8 +38,8 @@ function attackPlayerBoard(){
       boardCell.addEventListener('click', (e) => {
         if (
           e.target.classList.contains('boardCell--attacked') !== true &&
-          game.state !== 'animating'
-          && game.turn === 'player'
+          game.state !== 'animating' &&
+          game.turn === 'player'
         ) {
           let topPos;
           let leftPos;
@@ -78,14 +70,14 @@ function attackPlayerBoard(){
             spanElement.remove();
             game.state = '';
             if (shipGotHit instanceof Ship) {
-              e.target.classList.add('boardCell__withImage')
-              e.target.style.backgroundImage = `url('./assets/images/${shipGotHit.icon}`
+              e.target.classList.add('boardCell__withImage');
+              e.target.style.backgroundImage = `url('./assets/images/${shipGotHit.icon}`;
               game.player.char.voice.shipHit.play();
             } else {
               game.player.char.voice.boardHit.play();
-              game.turn = 'bot'
+              game.turn = 'bot';
               renderAttackingPlayer();
-              attackPlayerBoard()
+              attackPlayerBoard();
             }
           });
         }
@@ -96,6 +88,3 @@ function attackPlayerBoard(){
     botBoard.append(boardRow);
   }
 })();
-
-
-
