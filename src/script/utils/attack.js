@@ -1,25 +1,7 @@
 import { game } from '../DOM/charSel';
 import convertCorrespondingAngle from './angle';
 import generateRandomPosition from './random';
-
-function generateTextAnimation(textBox, message) {
-  const textBoxElement = document.getElementById(textBox);
-  const typeDelay = 20;
-  let charIndex = 0;
-  textBoxElement.textContent = '';
-  return new Promise((resolve) => {
-    function type() {
-      if (charIndex < message.length) {
-        textBoxElement.textContent += message.charAt(charIndex);
-        charIndex += 1;
-        setTimeout(type, typeDelay);
-      } else if (charIndex === message.length) {
-        resolve('doneTyping');
-      }
-    }
-    type();
-  });
-}
+import { clearText, generateShipSunkLines, generateTextAnimation } from './voiceLines';
 
 function renderAttackingPlayer(){
   const playerTextbox = document.getElementById('playerTextBox');
@@ -35,6 +17,15 @@ function renderAttackingPlayer(){
     botTextBox.classList.remove('attacking')
 
   }
+}
+
+function delayThenClearText(millisecond){
+  return new Promise((resolve)=>{
+    setTimeout(() => {
+      clearText()
+      resolve()
+    }, millisecond);
+  })
 }
 
 function attackRandomly() {
@@ -82,11 +73,15 @@ function attackRandomly() {
         boardCell.style.backgroundImage = `url('./assets/images/${attackedShip.icon}`
         game.player.char.voice.shipHit.play()
         renderAttackingPlayer()
-        console.log('Ship destroyed')
-        setTimeout(() => {
-        attackRandomly()
-          
-        }, 400);
+        const sunkShipLine = generateShipSunkLines(game.player.char,attackedShip.shipName)
+        generateTextAnimation('playerText',sunkShipLine).then(()=>{
+          delayThenClearText(1500).then(()=>{
+              setTimeout(() => {
+                attackRandomly()
+              }, 1500);
+          })
+        })
+        
       
     } else if (attackedShip instanceof Object) {
       game.bot.hitState = null;
@@ -114,4 +109,4 @@ function generateAdjacentAttack(coord) {
   return coord;
 }
 
-export { renderAttackingPlayer,attackRandomly, generateAdjacentAttack,generateTextAnimation };
+export { renderAttackingPlayer,attackRandomly, generateAdjacentAttack, };

@@ -4,8 +4,8 @@ import Gameboard from '../class/gameboard';
 import Ship, { placeShipObject } from '../class/ship';
 import { game } from './charSel';
 import { generateOpponentGameboard } from '../utils/random';
-import { renderAttackingPlayer,generateTextAnimation } from '../utils/attack';
-
+import { renderAttackingPlayer } from '../utils/attack';
+import {generateBattleEntranceVoiceLines } from '../utils/voiceLines';
 
 function renderPlayerCellImage() {
   let cellImage;
@@ -221,68 +221,6 @@ function renderBoardCell(boardId) {
     toggleContinueButton();
   });
 })();
-
-async function generateBattleEntranceVoiceLines() {
-  await new Promise((resolve) => {
-    setTimeout(() => {
-      resolve('500 millisecond has passed');
-    }, 1000);
-  });
-  await game.player.char.voice.entrance.play();
-  if (game.player.char.characterName === 'necoArc') {
-    await generateTextAnimation(
-      'playerText',
-      'Ready to get clobbered, Neco Chaos?',
-    );
-  } else if (game.player.char.characterName === 'necoChaos') {
-    await generateTextAnimation(
-      'playerText',
-      'Prepare to be ship-wrecked, Neco-Arc!',
-    );
-  }
-
-  await new Promise((resolve) => {
-    setTimeout(() => {
-      resolve('1 second has passed');
-    }, 1000);
-  });
-  await game.bot.char.voice.entrance.play();
-
-  if (game.player.char.characterName === 'necoArc') {
-    await generateTextAnimation(
-      'botText',
-      'Only if you can dodge my chaotic torpedoes, Neco-Arc!',
-    );
-  } else if (game.player.char.characterName === 'necoChaos') {
-    await generateTextAnimation(
-      'botText',
-      'Not before I turn your fleet into fish food, Neco Chaos!',
-    );
-  }
-  await new Promise((resolve) => {
-    setTimeout(() => {
-      resolve();
-    }, 1500);
-  });
-
-  const letsRock = document.getElementById('letsRock');
-  letsRock.style.visibility = 'visible';
-
-  await new Promise((resolve) => {
-    setTimeout(() => {
-      resolve();
-    }, 200);
-  });
-
-  game.player.char.voice.letsRock.play();
-
-  await new Promise((resolve) => {
-    setTimeout(() => {
-      letsRock.style.visibility = 'hidden';
-      resolve('1 second has passed');
-    }, 1100);
-  });
-}
 
 (function renderContinueButton() {
   const continueButton = document.getElementById(
