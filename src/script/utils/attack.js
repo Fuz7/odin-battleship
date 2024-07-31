@@ -1,7 +1,25 @@
-import Ship from '../class/ship';
 import { game } from '../DOM/charSel';
 import convertCorrespondingAngle from './angle';
 import generateRandomPosition from './random';
+
+function generateTextAnimation(textBox, message) {
+  const textBoxElement = document.getElementById(textBox);
+  const typeDelay = 20;
+  let charIndex = 0;
+  textBoxElement.textContent = '';
+  return new Promise((resolve) => {
+    function type() {
+      if (charIndex < message.length) {
+        textBoxElement.textContent += message.charAt(charIndex);
+        charIndex += 1;
+        setTimeout(type, typeDelay);
+      } else if (charIndex === message.length) {
+        resolve('doneTyping');
+      }
+    }
+    type();
+  });
+}
 
 function renderAttackingPlayer(){
   const playerTextbox = document.getElementById('playerTextBox');
@@ -51,7 +69,26 @@ function attackRandomly() {
       boardCell.classList.add('boardCell--attacked')
       spanElement.remove();
       game.state = '';
-    if (attackedShip instanceof Object) {
+      if(attackedShip === null){
+        game.player.char.voice.boardHit.play()
+        game.turn = 'player';
+        renderAttackingPlayer()
+        
+      }
+      else if (attackedShip.isSunk() === true) {
+        game.bot.hitState = null;
+        game.bot.recentlyHitShip = null;
+        boardCell.classList.add('boardCell__withImage')
+        boardCell.style.backgroundImage = `url('./assets/images/${attackedShip.icon}`
+        game.player.char.voice.shipHit.play()
+        renderAttackingPlayer()
+        console.log('Ship destroyed')
+        setTimeout(() => {
+        attackRandomly()
+          
+        }, 400);
+      
+    } else if (attackedShip instanceof Object) {
       game.bot.hitState = null;
       game.bot.recentlyHitShip = attackedShip;
       boardCell.classList.add('boardCell__withImage')
@@ -62,10 +99,6 @@ function attackRandomly() {
       attackRandomly()
         
       }, 400);
-    } else if (attackedShip === null) {
-      game.player.char.voice.boardHit.play()
-      game.turn = 'player';
-      renderAttackingPlayer()
     }
 
     })
@@ -81,4 +114,4 @@ function generateAdjacentAttack(coord) {
   return coord;
 }
 
-export { renderAttackingPlayer,attackRandomly, generateAdjacentAttack };
+export { renderAttackingPlayer,attackRandomly, generateAdjacentAttack,generateTextAnimation };

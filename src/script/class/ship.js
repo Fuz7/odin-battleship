@@ -5,7 +5,7 @@ export default class Ship{
     this.life = lenght;
     this.destroyed = [];
     this.icon = null;
-
+    this.shipName = '';
   }
 
   hit(shotCoord){

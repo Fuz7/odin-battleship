@@ -4,8 +4,7 @@ import Gameboard from '../class/gameboard';
 import Ship, { placeShipObject } from '../class/ship';
 import { game } from './charSel';
 import { generateOpponentGameboard } from '../utils/random';
-import {generateTextAnimation} from './battle';
-import { renderAttackingPlayer } from '../utils/attack';
+import { renderAttackingPlayer,generateTextAnimation } from '../utils/attack';
 
 
 function renderPlayerCellImage() {
@@ -91,6 +90,16 @@ function toggleContinueButton() {
     continueButton.classList.add('placeShipPage__continueButton--invalid');
   }
 }
+
+function addPlayerShipNames(){
+  for(let i = 0;i < 5;i+= 1){
+    const shipName = document.getElementById(`placeShip${i + 1}`).value
+    const sortedShips = game.player.gameboard.ships.sort((a,b)=> a.lenght-b.lenght)
+    const ship = sortedShips[i]
+    ship.shipName = shipName
+  }
+}
+
 
 function renderBoardCell(boardId) {
   const board = document.getElementById(boardId);
@@ -314,6 +323,8 @@ async function generateBattleEntranceVoiceLines() {
 
       renderPlayerCellImage();
       generateOpponentGameboard();
+      addPlayerShipNames()
+      console.log(game.player)
       generateBattleEntranceVoiceLines().then(() => {
         game.turn = 'player';
         renderAttackingPlayer();

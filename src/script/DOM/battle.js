@@ -6,25 +6,6 @@ import { game } from './charSel';
 import '../utils/images';
 import { attackRandomly, renderAttackingPlayer } from '../utils/attack';
 
-function generateTextAnimation(textBox, message) {
-  const textBoxElement = document.getElementById(textBox);
-  const typeDelay = 20;
-  let charIndex = 0;
-  textBoxElement.textContent = '';
-  return new Promise((resolve) => {
-    function type() {
-      if (charIndex < message.length) {
-        textBoxElement.textContent += message.charAt(charIndex);
-        charIndex += 1;
-        setTimeout(type, typeDelay);
-      } else if (charIndex === message.length) {
-        resolve('doneTyping');
-      }
-    }
-    type();
-  });
-}
-
 (function renderPlayerBoard() {
   const playerBoard = document.getElementById('playerGameboard');
   for (let i = 9; i >= 0; i -= 1) {
@@ -118,4 +99,3 @@ function attackPlayerBoard(){
 
 
 
-export{generateTextAnimation} ;
