@@ -42,6 +42,8 @@ export default class Player {
     if (existingCoord === true || shipGotHitBool === true) {
       return false;
     }
+    if(coordinate[0] < 0 || coordinate[0] > 9) return false
+    if(coordinate[1] < 0 || coordinate[1] > 9) return false
     return true;
   }
 

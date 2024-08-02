@@ -43,3 +43,16 @@ Neco Chaos: Argh! Chaos Cruiser is down? You’ve unleashed the full chaos now, 
 
 Neco Chaos: Yikes! Chaos Cruiser is out? Guess it’s time for some extra-chaotic mayhem!
 
+
+## Neco Arc Wins
+
+Neco-Arc: Nyaa~! I win! Your chaos is no match for my brilliance, Neco Chaos!
+
+Neco Chaos: Grr, you may have won, but next time I'll turn your victory into ashes, Neco-Arc!
+
+## Neco Chaos Wins
+
+Neco Chaos: Mwahaha! Victory is mine, Neco-Arc! Your cute tricks are worthless against true chaos!
+
+Neco-Arc: Nyaa~! You may have won this time, but I’ll be back to claw my way to victory!
+

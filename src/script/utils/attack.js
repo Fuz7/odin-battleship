@@ -95,7 +95,7 @@ function attackRandomly() {
         renderAttackingPlayer();
         setTimeout(() => {
           attackPlayerBoard();
-        }, 400);
+        }, 600);
       }
     });
   } else if (game.bot.checkHitValidity([x, y]) !== true) {
@@ -174,7 +174,7 @@ function attackAdjacent() {
         renderAttackingPlayer();
         setTimeout(() => {
           attackPlayerBoard();
-        }, 400);
+        }, 600);
       }
     });
   } else if (
@@ -255,7 +255,7 @@ function attackInParallel() {
           renderAttackingPlayer();
           setTimeout(() => {
             attackPlayerBoard();
-          }, 400);
+          }, 600);
         }
       });
     } else if (
@@ -332,7 +332,7 @@ function attackInParallel() {
           renderAttackingPlayer();
           setTimeout(() => {
             attackPlayerBoard();
-          }, 400);
+          }, 600);
         }
       });
     } else if (
