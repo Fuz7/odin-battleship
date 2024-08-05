@@ -4,7 +4,7 @@ import { game } from './charSel';
 import { generateOpponentGameboard } from '../utils/random';
 import { renderAttackingPlayer } from '../utils/attack';
 import {generateBattleEntranceVoiceLines } from '../utils/voiceLines';
-import renderBotBoard, { reshuffleImages } from './battle';
+import renderBotBoard, { renderPlayerBoard, reshuffleImages } from './battle';
 import generateArrayCoordinates from '../utils/array';
 
 function renderPlayerCellImage() {
@@ -277,6 +277,7 @@ function renderBoardCell(boardId) {
       generateOpponentGameboard();
       addPlayerShipNames()
       console.log(game.player)
+      renderPlayerBoard()
       renderPlayerCellImage();
       renderBotBoard()
       generateBattleEntranceVoiceLines().then(() => {

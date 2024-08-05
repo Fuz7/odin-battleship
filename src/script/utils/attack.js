@@ -71,7 +71,8 @@ function attackRandomly() {
       }else if(game.player.gameboard.shipsSunk()=== true){
         const gameOverContainer = document.getElementById('gameOverContainer')
         const gameOverText = document.getElementById('gameOverPanel__text')
-        delayThenClearText(1000).then(()=>{
+        if(game.sfx === true)game.player.char.voice.shipHit.play();
+        delayThenClearText(1500).then(()=>{
           if(game.sfx === true)game.bot.char.voice.win.play()
           generateTextAnimation('botText',game.bot.char.message.victoryQuote).then(()=>{
             setTimeout(() => {
@@ -168,7 +169,8 @@ function attackAdjacent() {
       }else if(game.player.gameboard.shipsSunk()=== true){
                const gameOverContainer = document.getElementById('gameOverContainer')
         const gameOverText = document.getElementById('gameOverPanel__text')
-        delayThenClearText(1000).then(()=>{
+        if(game.sfx === true)game.player.char.voice.shipHit.play();
+        delayThenClearText(1500).then(()=>{
           if(game.sfx === true)game.bot.char.voice.win.play()
           generateTextAnimation('botText',game.bot.char.message.victoryQuote).then(()=>{
             setTimeout(() => {
@@ -276,7 +278,8 @@ function attackInParallel() {
         }else if(game.player.gameboard.shipsSunk()=== true){
         const gameOverContainer = document.getElementById('gameOverContainer')
         const gameOverText = document.getElementById('gameOverPanel__text')
-        delayThenClearText(1000).then(()=>{
+        if(game.sfx === true)game.player.char.voice.shipHit.play();
+        delayThenClearText(1500).then(()=>{
           if(game.sfx === true)game.bot.char.voice.win.play()
           generateTextAnimation('botText',game.bot.char.message.victoryQuote).then(()=>{
             setTimeout(() => {
@@ -316,6 +319,7 @@ function attackInParallel() {
           game.bot.recentlyHitShip = attackedShip;
           boardCell.classList.add('boardCell__withImage');
           boardCell.style.backgroundImage = `url('./assets/images/${attackedShip.icon}`;
+          game.turn = 'bot'
           if(game.sfx === true)game.player.char.voice.shipHit.play();
           renderAttackingPlayer();
           setTimeout(() => {
@@ -381,7 +385,24 @@ function attackInParallel() {
           if(game.sfx === true)game.player.char.voice.boardHit.play();
           game.turn = 'player';
           renderAttackingPlayer();
-        } else if (attackedShip.isSunk() === true) {
+        }else if(game.player.gameboard.shipsSunk()=== true){
+        const gameOverContainer = document.getElementById('gameOverContainer')
+        const gameOverText = document.getElementById('gameOverPanel__text')
+        if(game.sfx === true)game.player.char.voice.shipHit.play();
+        delayThenClearText(1500).then(()=>{
+          if(game.sfx === true)game.bot.char.voice.win.play()
+          generateTextAnimation('botText',game.bot.char.message.victoryQuote).then(()=>{
+            setTimeout(() => {
+              generateTextAnimation('playerText',game.player.char.message.loseQuote).then(()=>{
+                delayThenClearText(4000).then(()=>{
+                  gameOverText.textContent = 'You Lose'
+                  gameOverContainer.classList.add('visible')
+                })
+              })
+            }, 2000);
+          })
+        })
+        }  else if (attackedShip.isSunk() === true) {
           game.bot.hitState = null;
           game.bot.recentlyHitShip = null;
           boardCell.classList.add('boardCell__withImage');
@@ -404,6 +425,7 @@ function attackInParallel() {
           game.bot.recentlyHitShip = attackedShip;
           boardCell.classList.add('boardCell__withImage');
           boardCell.style.backgroundImage = `url('./assets/images/${attackedShip.icon}`;
+          game.turn = 'bot'
           if(game.sfx === true)game.player.char.voice.shipHit.play();
           renderAttackingPlayer();
           setTimeout(() => {

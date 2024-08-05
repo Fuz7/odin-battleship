@@ -14,8 +14,9 @@ import Player from '../class/player';
 import { generateTextAnimation } from '../utils/voiceLines';
 import { randomizeArray } from '../utils/array';
 
-(function renderPlayerBoard() {
+function renderPlayerBoard() {
   const playerBoard = document.getElementById('playerGameboard');
+  playerBoard.innerHTML = ''
   for (let i = 9; i >= 0; i -= 1) {
     const boardRow = document.createElement('div');
     boardRow.classList.add('playerGameboard__boardRow');
@@ -29,7 +30,7 @@ import { randomizeArray } from '../utils/array';
     }
     playerBoard.append(boardRow);
   }
-})();
+};
 
 function renderBotBoard() {
   const botBoard = document.getElementById('botGameboard');
@@ -88,7 +89,7 @@ function renderBotBoard() {
               const gameOverText = document.getElementById(
                 'gameOverPanel__text',
               );
-              delayThenClearText(500).then(() => {
+              delayThenClearText(800).then(() => {
                 if (game.sfx === true) game.player.char.voice.win.play();
                 generateTextAnimation(
                   'playerText',
@@ -219,6 +220,6 @@ function removePlacedShip() {
   });
 })();
 renderBotBoard();
-
+renderPlayerBoard()
 export default renderBotBoard;
-export {reshuffleImages}
+export {reshuffleImages,renderPlayerBoard}
