@@ -1,104 +1,202 @@
-  <!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Battleship</title>
-<script defer src="main.js"></script><link href="styles.css" rel="stylesheet"></head>
-<body id="body">
-  <nav>
-    <img src="./assets/images/logo.png" alt="NecoShip Logo" draggable="false" class="logo">
-    <button id="settingsButton" class="settingsButton" type="button"><span class="settingsLogo"></span></button>
-  </nav>
-  <div id="settingsContainer" class="settingsContainer">
-    <div class="settingsPage">
-      <button id="settingsPage__closeButton" class="settingsPage__closeButton"><span class=""></span></button>
-      <button id="sfxButton" class="sfxButton--on" type="button"><span class=""></span></button>
-      <button id="musicButton" class="musicButton--on" type="button"><span class=""></span></button>
-    </div>
-  </div>
-  <section id="charSelContainer" class="charSelContainer--visible">
-    <div id="charSelPage" class="charSelPage">
-      <h1>Select Char</h1>
-      <div class="charSelPage__imageContainer">
-        <button id="charSelPage__necoArc" class="charSelPage__necoArc"><span></span></button>
-        <button id="charSelPage__necoChaos"class="charSelPage__necoChaos"> <span></span></button>
-      </div>
-      <div class="charSelPage__textContainer">
-        <p id="charSelPage__necoArcText" class="charSelPage__necoArcText">Neco Arc</p>
-        <p  id="charSelPage__necoChaosText" class="charSelPage__necoChaosText">Neco Chaos</p>
-      </div>
-    </div>
-  
-  </section>
-  <section id="placeShipContainer" class="placeShipContainer">
-    <div id="placeShipPage" class="placeShipPage" draggable="false">
-      <div class="placeShipPage__gridContainer" draggable="false">
-        <button id="shipAxisButton" class="shipAxisButton" data-position="x-axis">X-Axis</button>
-        <div id="placeShipBoard" class="placeShipBoard"></div>
-        <div class="placeShipPage__buttonContainer">
-          <button id="placeShipPage__resetButton" class="placeShipPage__resetButton">Reset</button>
-          <button id="placeShipPage__continueButton" class="placeShipPage__continueButton--invalid">Continue</button>
-        </div>
-      </div>
-      <div class="placeShipPage__shipContainer" draggable="false">
-        <h1 class="placeShipPage__title">Place Ship</h1>
-        <div class="fleetContainer">
-          <div class="fleetContainer__flexContainer">
-            <div class="fleetContainer__shipImage" data-length="5" tabindex="0"></div>
-            <p class="fleetContainer__shipLenght">5</p>
-            <input class="fleetContainer__shipName" type="text" id="placeShip5" value="Battleship"  >
-          </div>
-          <div class="fleetContainer__flexContainer" >
-            <div class="fleetContainer__shipImage" data-length="4" tabindex="0"></div>
-            <p class="fleetContainer__shipLenght">4</p>
-            <input class="fleetContainer__shipName" type="text" id="placeShip4" value="Carrier">
-          </div>
-          <div class="fleetContainer__flexContainer">
-            <div class="fleetContainer__shipImage" data-length="3" tabindex="0"></div>
-            <p class="fleetContainer__shipLenght">3</p>
-            <input class="fleetContainer__shipName" type="text" id="placeShip3" value="Ship">
-          </div>
-          <div class="fleetContainer__flexContainer">
-            <div class="fleetContainer__shipImage"data-length="2" tabindex="0"></div>
-            <p class="fleetContainer__shipLenght">2</p>
-            <input class="fleetContainer__shipName" type="text" id="placeShip2" value="Boat">
-          </div>
-          <div class="fleetContainer__flexContainer">
-            <div class="fleetContainer__shipImage" data-length="1" tabindex="0"></div>
-            <p class="fleetContainer__shipLenght">1</p>
-            <input class="fleetContainer__shipName" type="text" id="placeShip1" value="Cat">
-          </div>
-        </div>
-        <button id="placeShipPage__reshuffleButton" class="placeShipPage__reshuffleButton">Reshuffle</button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Battleship</title>
+  <script defer src="main.js"></script><link href="styles.css" rel="stylesheet"></head>
+  <body id="body">
+    <nav>
+      <img
+        src="./assets/images/logo.png"
+        alt="NecoShip Logo"
+        draggable="false"
+        class="logo"
+      />
+      <button id="settingsButton" class="settingsButton" type="button">
+        <span class="settingsLogo"></span>
+      </button>
+    </nav>
+    <div id="settingsContainer" class="settingsContainer">
+      <div class="settingsPage">
+        <button
+          id="settingsPage__closeButton"
+          class="settingsPage__closeButton"
+        >
+          <span class=""></span>
+        </button>
+        <button id="sfxButton" class="sfxButton--on" type="button">
+          <span class=""></span>
+        </button>
+        <button id="musicButton" class="musicButton--on" type="button">
+          <span class=""></span>
+        </button>
       </div>
     </div>
-
-  </section>
-  <section id="mainGameContainer" class="mainGameContainer">
-    <div id="mainGamePage" class="mainGamePage">
-      <div class="mainGamePage__boardContainer">
-        <div id="playerGameboard" class="boardContainer__gameBoard">
-          
+    <section id="charSelContainer" class="charSelContainer--visible">
+      <div id="charSelPage" class="charSelPage">
+        <h1>Select Char</h1>
+        <div class="charSelPage__imageContainer">
+          <button id="charSelPage__necoArc" class="charSelPage__necoArc">
+            <span></span>
+          </button>
+          <button id="charSelPage__necoChaos" class="charSelPage__necoChaos">
+            <span></span>
+          </button>
         </div>
-        <div id="botGameboard" class="boardContainer__gameBoard">
-        
+        <div class="charSelPage__textContainer">
+          <p id="charSelPage__necoArcText" class="charSelPage__necoArcText">
+            Neco Arc
+          </p>
+          <p id="charSelPage__necoChaosText" class="charSelPage__necoChaosText">
+            Neco Chaos
+          </p>
         </div>
-
       </div>
-      <div id="playerTextBox" class="mainGamePage__textBox">
-        <span id="playerIcon"></span> 
-         <p id="playerText">...</p> 
-         <div class="blinkingBar"></div>
+    </section>
+    <section id="placeShipContainer" class="placeShipContainer">
+      <div id="placeShipPage" class="placeShipPage" draggable="false">
+        <div class="placeShipPage__gridContainer" draggable="false">
+          <button
+            id="shipAxisButton"
+            class="shipAxisButton"
+            data-position="x-axis"
+          >
+            X-Axis
+          </button>
+          <div id="placeShipBoard" class="placeShipBoard"></div>
+          <div class="placeShipPage__buttonContainer">
+            <button
+              id="placeShipPage__resetButton"
+              class="placeShipPage__resetButton"
+            >
+              Reset
+            </button>
+            <button
+              id="placeShipPage__continueButton"
+              class="placeShipPage__continueButton--invalid"
+            >
+              Continue
+            </button>
+          </div>
+        </div>
+        <div class="placeShipPage__shipContainer" draggable="false">
+          <h1 class="placeShipPage__title">Place Ship</h1>
+          <div class="fleetContainer">
+            <div class="fleetContainer__flexContainer">
+              <div
+                class="fleetContainer__shipImage"
+                data-length="5"
+                tabindex="0"
+              ></div>
+              <p class="fleetContainer__shipLenght">5</p>
+              <input
+                class="fleetContainer__shipName"
+                type="text"
+                id="placeShip5"
+                value="Battleship"
+              />
+            </div>
+            <div class="fleetContainer__flexContainer">
+              <div
+                class="fleetContainer__shipImage"
+                data-length="4"
+                tabindex="0"
+              ></div>
+              <p class="fleetContainer__shipLenght">4</p>
+              <input
+                class="fleetContainer__shipName"
+                type="text"
+                id="placeShip4"
+                value="Carrier"
+              />
+            </div>
+            <div class="fleetContainer__flexContainer">
+              <div
+                class="fleetContainer__shipImage"
+                data-length="3"
+                tabindex="0"
+              ></div>
+              <p class="fleetContainer__shipLenght">3</p>
+              <input
+                class="fleetContainer__shipName"
+                type="text"
+                id="placeShip3"
+                value="Ship"
+              />
+            </div>
+            <div class="fleetContainer__flexContainer">
+              <div
+                class="fleetContainer__shipImage"
+                data-length="2"
+                tabindex="0"
+              ></div>
+              <p class="fleetContainer__shipLenght">2</p>
+              <input
+                class="fleetContainer__shipName"
+                type="text"
+                id="placeShip2"
+                value="Boat"
+              />
+            </div>
+            <div class="fleetContainer__flexContainer">
+              <div
+                class="fleetContainer__shipImage"
+                data-length="1"
+                tabindex="0"
+              ></div>
+              <p class="fleetContainer__shipLenght">1</p>
+              <input
+                class="fleetContainer__shipName"
+                type="text"
+                id="placeShip1"
+                value="Cat"
+              />
+            </div>
+          </div>
+          <button
+            id="placeShipPage__reshuffleButton"
+            class="placeShipPage__reshuffleButton"
+          >
+            Reshuffle
+          </button>
+        </div>
       </div>
-      <div id="botTextBox" class="mainGamePage__textBox">
-        <div class="blinkingBar"></div>
-        <p id="botText">...</p>
-        <span id="botIcon"></span>
+    </section>
+    <section id="mainGameContainer" class="mainGameContainer">
+      <div id="mainGamePage" class="mainGamePage">
+        <div class="mainGamePage__boardContainer">
+          <div id="playerGameboard" class="boardContainer__gameBoard"></div>
+          <div id="botGameboard" class="boardContainer__gameBoard"></div>
+        </div>
+        <div id="playerTextBox" class="mainGamePage__textBox">
+          <span id="playerIcon"></span>
+          <p id="playerText">...</p>
+          <div class="blinkingBar"></div>
+        </div>
+        <div id="botTextBox" class="mainGamePage__textBox">
+          <div class="blinkingBar"></div>
+          <p id="botText">...</p>
+          <span id="botIcon"></span>
+        </div>
+        <div id="gameOverContainer" class="gameOverContainer">
+          <div id="gameOverPanel" class="gameOverPanel">
+            <div id="gameOverPanel__text" class="gameOverPanel__text">
+              You Win
+            </div>
+            <div
+              id="gameOverPanel__restartButton"
+              class="gameOverPanel__restartButton"
+            ></div>
+          </div>
+        </div>
+        <img
+          id="letsRock"
+          class="letsRock"
+          src="./assets/images/letsRock.gif"
+          alt=""
+        />
       </div>
-      <img id="letsRock" class="letsRock" src="./assets/images/letsRock.gif" alt="">
-    </div>
-  </section>
- 
-</body>
+    </section>
+  </body>
 </html>
