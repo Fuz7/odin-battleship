@@ -46,7 +46,7 @@ Neco Chaos: Yikes! Chaos Cruiser is out? Guess it’s time for some extra-chaoti
 
 ## Neco Arc Wins
 
-Neco-Arc: Nyaa~! I win! Your chaos is no match for my brilliance, Neco Chaos!
+Neco-Arc: Nyaa~! I win! L+ratio, Neco Chaos!
 
 Neco Chaos: Grr, you may have won, but next time I'll turn your victory into ashes, Neco-Arc!
 

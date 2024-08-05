@@ -4,7 +4,7 @@ class Game{
     this.bot = null;
     this.turn = null;
     this.state = null
-    this.sfx = false;
+    this.sfx = true;
   }
 
     

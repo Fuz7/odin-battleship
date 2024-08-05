@@ -9,6 +9,7 @@ import arcShipDestoryed from '../../assets/audio/arcShipDestroyed.mp3'
 import shipHits from '../../assets/audio/shipHit.mp3'
 import boardHits from '../../assets/audio/boardHit.mp3'
 import letsRockk from '../../assets/audio/letsRock.mp3'
+import winVoice from '../../assets/audio/necoArcWin.mp3'
 
 const necoArc = {
   characterName : 'necoArc',
@@ -21,6 +22,7 @@ const necoArc = {
     shipHit: shipHits,
     boardHit: boardHits,
     letsRock: letsRockk,
+    win: winVoice,
   },
   
   images:['iNA1.jpg','iNA2.jpg','iNA3.jpg','iNA4.jpg','iNA5.jpg','iNA6.jpg','iNA7.jpg','iNA8.jpg','iNA9.jpg',
@@ -30,6 +32,8 @@ const necoArc = {
   message:{
     userIntro:'Nyaa~! Ready to get clobbered, Neco Chaos?',
     enemyIntro:' Not before I turn your fleet into fish food, Neco Chaos!',
+    victoryQuote:'Nyaa~! I win! L+ratio, Neco Chaos!',
+    loseQuote:'Nyaa~! You may have won this time, but I’ll be back to claw my way to victory'
   },
 }
 

@@ -69,7 +69,21 @@ function attackRandomly() {
         game.turn = 'player';
         renderAttackingPlayer();
       }else if(game.player.gameboard.shipsSunk()=== true){
-        console.log('you Lose')
+        const gameOverContainer = document.getElementById('gameOverContainer')
+        const gameOverText = document.getElementById('gameOverPanel__text')
+        delayThenClearText(1000).then(()=>{
+          if(game.sfx === true)game.bot.char.voice.win.play()
+          generateTextAnimation('botText',game.bot.char.message.victoryQuote).then(()=>{
+            setTimeout(() => {
+              generateTextAnimation('playerText',game.player.char.message.loseQuote).then(()=>{
+                delayThenClearText(4000).then(()=>{
+                  gameOverText.textContent = 'You Lose'
+                  gameOverContainer.classList.add('visible')
+                })
+              })
+            }, 2000);
+          })
+        })
       } 
       else if (attackedShip.isSunk() === true) {
         game.bot.hitState = null;
@@ -82,6 +96,7 @@ function attackRandomly() {
           game.player.char,
           attackedShip.shipName,
         );
+          if(game.sfx === true) game.player.char.voice.shipDestroyed.play()
         generateTextAnimation('playerText', sunkShipLine).then(() => {
           delayThenClearText(1500).then(() => {
             setTimeout(() => {
@@ -151,7 +166,21 @@ function attackAdjacent() {
         game.turn = 'player';
         renderAttackingPlayer();
       }else if(game.player.gameboard.shipsSunk()=== true){
-        console.log('you Lose')
+               const gameOverContainer = document.getElementById('gameOverContainer')
+        const gameOverText = document.getElementById('gameOverPanel__text')
+        delayThenClearText(1000).then(()=>{
+          if(game.sfx === true)game.bot.char.voice.win.play()
+          generateTextAnimation('botText',game.bot.char.message.victoryQuote).then(()=>{
+            setTimeout(() => {
+              generateTextAnimation('playerText',game.player.char.message.loseQuote).then(()=>{
+                delayThenClearText(4000).then(()=>{
+                  gameOverText.textContent = 'You Lose'
+                  gameOverContainer.classList.add('visible')
+                })
+              })
+            }, 2000);
+          })
+        }) 
       }  else if (attackedShip.isSunk() === true) {
         game.bot.hitState = null;
         game.bot.recentlyHitShip = null;
@@ -163,6 +192,7 @@ function attackAdjacent() {
           game.player.char,
           attackedShip.shipName,
         );
+        if(game.sfx === true) game.player.char.voice.shipDestroyed.play()
         generateTextAnimation('playerText', sunkShipLine).then(() => {
           delayThenClearText(1500).then(() => {
             setTimeout(() => {
@@ -195,11 +225,21 @@ function attackInParallel() {
     const sortedXArray = destroyedCoords.sort((a, b) => a[0] - b[0]);
     const leastValue = sortedXArray[0][0];
     const biggestValue = sortedXArray[sortedXArray.length - 1][0];
+    const difference = biggestValue - leastValue;
     const possibleCoords = [
       [leastValue - 1, sortedXArray[0][1]],
       [biggestValue + 1, sortedXArray[sortedXArray.length - 1][1]],
     ];
-    const randomNumber = Math.floor(Math.random() * 2);
+    let randomNumber = Math.floor(Math.random() * 2);
+    if(difference === 2){
+      randomNumber = Math.floor(Math.random() * 3)
+      possibleCoords.push([leastValue+1,sortedXArray[0][1]])
+    }
+    if(difference === 3){
+      randomNumber = Math.floor(Math.random() * 4)
+      possibleCoords.push([leastValue+1,sortedXArray[0][1]])
+      possibleCoords.push([leastValue + 2,sortedXArray[0][0]])
+    }
     const chosenCoord = possibleCoords[randomNumber];
     if (game.bot.checkHitValidity([chosenCoord[0], chosenCoord[1]]) === true) {
       const attackedShip = game.bot.hitBoard([chosenCoord[0], chosenCoord[1]]);
@@ -234,7 +274,21 @@ function attackInParallel() {
           game.turn = 'player';
           renderAttackingPlayer();
         }else if(game.player.gameboard.shipsSunk()=== true){
-        console.log('you Lose')
+        const gameOverContainer = document.getElementById('gameOverContainer')
+        const gameOverText = document.getElementById('gameOverPanel__text')
+        delayThenClearText(1000).then(()=>{
+          if(game.sfx === true)game.bot.char.voice.win.play()
+          generateTextAnimation('botText',game.bot.char.message.victoryQuote).then(()=>{
+            setTimeout(() => {
+              generateTextAnimation('playerText',game.player.char.message.loseQuote).then(()=>{
+                delayThenClearText(4000).then(()=>{
+                  gameOverText.textContent = 'You Lose'
+                  gameOverContainer.classList.add('visible')
+                })
+              })
+            }, 2000);
+          })
+        })
         }  
         else if (attackedShip.isSunk() === true) {
           game.bot.hitState = null;
@@ -242,12 +296,15 @@ function attackInParallel() {
           boardCell.classList.add('boardCell__withImage');
           boardCell.style.backgroundImage = `url('./assets/images/${attackedShip.icon}`;
           if(game.sfx === true)game.player.char.voice.shipHit.play();
+          
           renderAttackingPlayer();
           const sunkShipLine = generateShipSunkLines(
             game.player.char,
             attackedShip.shipName,
           );
+          if(game.sfx === true) game.player.char.voice.shipDestroyed.play()
           generateTextAnimation('playerText', sunkShipLine).then(() => {
+
             delayThenClearText(1500).then(() => {
               setTimeout(() => {
                 attackPlayerBoard();
@@ -275,11 +332,22 @@ function attackInParallel() {
     const sortedYArray = destroyedCoords.sort((a, b) => a[1] - b[1]);
     const leastValue = sortedYArray[0][1];
     const biggestValue = sortedYArray[sortedYArray.length - 1][1];
+    const difference = biggestValue - leastValue;
+     
     const possibleCoords = [
       [sortedYArray[0][0], leastValue - 1],
       [sortedYArray[sortedYArray.length - 1][0], biggestValue + 1],
     ];
-    const randomNumber = Math.floor(Math.random() * 2);
+    let randomNumber = Math.floor(Math.random() * 2);
+    if(difference === 2){
+      randomNumber = Math.floor(Math.random() * 3)
+      possibleCoords.push([sortedYArray[0][0],leastValue+1])
+    }
+    if(difference === 3){
+      randomNumber = Math.floor(Math.random() * 4)
+      possibleCoords.push([sortedYArray[0][0],leastValue+1])
+      possibleCoords.push([sortedYArray[0][0],leastValue + 2])
+    }
     const chosenCoord = possibleCoords[randomNumber];
     if (game.bot.checkHitValidity([chosenCoord[0], chosenCoord[1]]) === true) {
       const attackedShip = game.bot.hitBoard([chosenCoord[0], chosenCoord[1]]);

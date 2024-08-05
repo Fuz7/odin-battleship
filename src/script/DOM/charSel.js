@@ -69,14 +69,20 @@ function removeCharSelContainerVisibility(){
   const necoArcButton = document.getElementById('charSelPage__necoArc');
   const necoChaosButton = document.getElementById('charSelPage__necoChaos');
   const charSelPage = document.getElementById('charSelPage')
+  const gameOverPanel = document.getElementById('gameOverPanel')
+  const restartButton = document.getElementById('gameOverPanel__restartButton')
+  const gameOverText = document.getElementById('gameOverPanel__text')
   necoArcButton.addEventListener('click', () => {
     if(choose !== true){
 
-      necoArc.voice.charSel.play()
+      if(game.sfx === true)necoArc.voice.charSel.play()
       game.player.setCharacter(necoArc)
       game.bot.setCharacter(necoChaos)
       choose = true
       charSelPage.classList.add('slideUp')
+      gameOverPanel.classList.add('necoArc')
+      restartButton.classList.add('necoArc')
+      gameOverText.classList.add('necoArc')
       charSelPage.addEventListener('animationend', ()=>{
         removeCharSelContainerVisibility()
         renderPlaceShipContent()
@@ -88,11 +94,14 @@ function removeCharSelContainerVisibility(){
   });
   necoChaosButton.addEventListener('click', () => {
     if(choose !== true){
-      necoChaos.voice.charSel.play()
+      if(game.sfx === true)necoChaos.voice.charSel.play()
       game.player.setCharacter(necoChaos)
       game.bot.setCharacter(necoArc)
       choose = true
       charSelPage.classList.add('slideUp')
+      gameOverPanel.classList.add('necoChaos')
+      restartButton.classList.add('necoChaos')
+      gameOverText.classList.add('necoChaos')
       charSelPage.addEventListener('animationend', ()=>{
         removeCharSelContainerVisibility()
         renderPlaceShipContent()

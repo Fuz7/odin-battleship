@@ -23,16 +23,76 @@
   text-align: center;
 
 }
+.gameOverContainer{
+  position: absolute;
+  left: 0;
+  top: 0;
+  min-width: 100%;
+  min-height: 100%;
+  background-color: rgba(0, 0, 0, 0.356);
+  visibility: hidden;
+  &.visible{
+    visibility: visible;
+  }
+}
+.gameOverPanel{
+  min-width: 370px;
+  min-height: 215px;
+  position: absolute;
+  left: 735px;
+  top: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 22px;
+
+  &.necoArc{
+    background-color: #BFB264;
+  }  
+  &.necoChaos{
+    background-color: #4F37A3;
+  }
+
+  &__text{
+    margin-top: 14px;
+    font-size: 64px;  
+    font-family: 'jotiOne';
+    &.necoArc{
+      color: black;
+    }
+    &.necoChaos{
+      color: #FFF8F8;
+    }
+  }
+
+  &__restartButton{
+    min-width: 92px;
+    min-height: 92px;
+    cursor: pointer;
+    &.necoArc{
+      background-image: url('../assets/images/restartButtonNecoArc.png');
+      &:hover{
+        background-image: url('../assets/images/restartButtonNecoArcHover.png');
+      }
+    }
+    &.necoChaos{
+      background-image: url('../assets/images/restartButtonNecoChaos.png');
+      &:hover{
+        background-image: url('../assets/images/restartButtonNecoChaosHover.png');
+      }
+    }
+  }
+}
 
 .mainGamePage{
-  margin-top: 18px;
+  padding-top: 18px;
   display: flex;
   flex-direction: column;
   position: relative;
   &__boardContainer{
     display: flex;
     gap: 52px;
-
+    position: relative;
   }
    
   &__textBox{
