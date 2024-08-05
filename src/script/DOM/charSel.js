@@ -20,6 +20,12 @@ function renderFleetImage() {
   else if(selectedChar === 'necoArc') character = necoArc
   const shuffledImage = randomizeArray(character.images)
 
+  const fleetLoaded = Array.from(document.getElementsByClassName('fleetContainer__shipImage--loaded'))
+  fleetLoaded.forEach((element)=>{
+    element.classList.remove('fleetContainer__shipImage--loaded')
+    element.classList.add('fleetContainer__shipImage')
+  })
+
   const fleetImages = Array.from(document.getElementsByClassName('fleetContainer__shipImage'))
   fleetImages.forEach((element,index)=>{
     // eslint-disable-next-line no-param-reassign
@@ -65,7 +71,6 @@ function removeCharSelContainerVisibility(){
 (function renderCharButtons() {
   game.player.setOpponent(game.bot)
   game.bot.setOpponent(game.player)
-  let choose;
   const necoArcButton = document.getElementById('charSelPage__necoArc');
   const necoChaosButton = document.getElementById('charSelPage__necoChaos');
   const charSelPage = document.getElementById('charSelPage')
@@ -73,12 +78,11 @@ function removeCharSelContainerVisibility(){
   const restartButton = document.getElementById('gameOverPanel__restartButton')
   const gameOverText = document.getElementById('gameOverPanel__text')
   necoArcButton.addEventListener('click', () => {
-    if(choose !== true){
+    if(game.player.char === null){
 
       if(game.sfx === true)necoArc.voice.charSel.play()
       game.player.setCharacter(necoArc)
       game.bot.setCharacter(necoChaos)
-      choose = true
       charSelPage.classList.add('slideUp')
       gameOverPanel.classList.add('necoArc')
       restartButton.classList.add('necoArc')
@@ -93,11 +97,10 @@ function removeCharSelContainerVisibility(){
     }
   });
   necoChaosButton.addEventListener('click', () => {
-    if(choose !== true){
+    if(game.player.char === null){
       if(game.sfx === true)necoChaos.voice.charSel.play()
       game.player.setCharacter(necoChaos)
       game.bot.setCharacter(necoArc)
-      choose = true
       charSelPage.classList.add('slideUp')
       gameOverPanel.classList.add('necoChaos')
       restartButton.classList.add('necoChaos')

@@ -220,7 +220,7 @@ function attackAdjacent() {
 }
 
 function attackInParallel() {
-  const destroyedCoords = game.bot.recentlyHitShip.destroyed;
+  const destroyedCoords = game.bot.recentlyHitShip.destroyed.sort((a,b)=>a[0]-b[0]);
   if (destroyedCoords[0][0] - destroyedCoords[1][0] !== 0) {
     const sortedXArray = destroyedCoords.sort((a, b) => a[0] - b[0]);
     const leastValue = sortedXArray[0][0];
@@ -453,4 +453,5 @@ export {
   generateAdjacentAttack,
   attackAdjacent,
   attackPlayerBoard,
+  delayThenClearText
 };

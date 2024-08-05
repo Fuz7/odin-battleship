@@ -1,14 +1,27 @@
 /* eslint-disable no-param-reassign */
-import generateArrayCoordinates, { randomizeArray } from '../utils/array';
-import Gameboard from '../class/gameboard';
 import Ship, { placeShipObject } from '../class/ship';
 import { game } from './charSel';
 import { generateOpponentGameboard } from '../utils/random';
 import { renderAttackingPlayer } from '../utils/attack';
 import {generateBattleEntranceVoiceLines } from '../utils/voiceLines';
+import renderBotBoard, { reshuffleImages } from './battle';
+import generateArrayCoordinates from '../utils/array';
 
 function renderPlayerCellImage() {
   let cellImage;
+
+  const boardCell = Array.from(document.getElementsByClassName('boardCell__withImage'))
+  boardCell.forEach((cell)=>{
+    cell.classList.remove('boardCell__withImage')
+    cell.style.backgroundImage= ''
+  })
+
+  const boardAttacked = Array.from(document.getElementsByClassName('animating'))
+  boardAttacked.forEach((cell)=>{
+    cell.classList.remove('animating')
+    cell.classList.remove('boardCell--attacked')
+  })
+
   game.player.gameboard.ships.forEach((ship) => {
     ship.coord.forEach((pos) => {
       cellImage = document.querySelector(
@@ -18,6 +31,7 @@ function renderPlayerCellImage() {
       cellImage.style.backgroundImage = `url('./assets/images/${ship.icon}')`;
     });
   });
+
 }
 // function renderBotCellImage(){
 //   let cellImage;
@@ -103,8 +117,7 @@ function addPlayerShipNames(){
 
 function renderBoardCell(boardId) {
   const board = document.getElementById(boardId);
-  const placeShipGameboard = new Gameboard();
-  game.player.gameboard = placeShipGameboard;
+  
   for (let i = 9; i >= 0; i -= 1) {
     const boardRow = document.createElement('div');
     boardRow.classList.add(`${boardId}__boardRow`);
@@ -163,7 +176,7 @@ function renderBoardCell(boardId) {
           [x, y],
           axis,
         );
-        coordValidity = placeShipGameboard.checkValidity(twoDimensionalCoords);
+        coordValidity = game.player.gameboard.checkValidity(twoDimensionalCoords);
         if (coordValidity === true) {
           const ship = new Ship(shipLenght, twoDimensionalCoords);
           ship.icon = dragElement.getAttribute('data-image');
@@ -259,10 +272,13 @@ function renderBoardCell(boardId) {
         `mainGamePage__textBox--${game.bot.char.characterName}`,
       );
 
-      renderPlayerCellImage();
+      game.turn = null
+      renderAttackingPlayer()
       generateOpponentGameboard();
       addPlayerShipNames()
       console.log(game.player)
+      renderPlayerCellImage();
+      renderBotBoard()
       generateBattleEntranceVoiceLines().then(() => {
         game.turn = 'player';
         renderAttackingPlayer();
@@ -273,34 +289,10 @@ function renderBoardCell(boardId) {
 })();
 
 (function renderReshuffleButton() {
-  const reshuffleButton = document.getElementById(
-    'placeShipPage__reshuffleButton',
-  );
-  reshuffleButton.addEventListener('click', () => {
-    const placedImages = Array.from(
-      document.getElementsByClassName('fleetContainer__shipImage--placed'),
-    );
-    const loadedImages = Array.from(
-      document.getElementsByClassName('fleetContainer__shipImage--loaded'),
-    );
+  reshuffleImages();
 
-    const placedImagesArr = placedImages.map((element) => {
-      const imageSrc = element.getAttribute('data-image');
-      return imageSrc;
-    });
-
-    const arrWithoutPlacedImage = game.player.char.images.filter((image) => {
-      if (placedImagesArr.includes(image)) return false;
-      return true;
-    });
-
-    const randomizedWithoutPlacedImage = randomizeArray(arrWithoutPlacedImage);
-
-    loadedImages.forEach((element, index) => {
-      element.style.backgroundImage = `url('./assets/images/${randomizedWithoutPlacedImage[index]}')`;
-      element.setAttribute('data-image', randomizedWithoutPlacedImage[index]);
-    });
-  });
 })();
 
 renderBoardCell('placeShipBoard');
+
+export default reshuffleImages
