@@ -156,13 +156,13 @@ function attackAdjacent() {
     spanElement.style.top = `${topPos}px`;
     spanElement.style.left = `${leftPos}px`;
 
-    attackSoundEffect.play();
+    if(game.sfx === true)attackSoundEffect.play();
     boardCell.addEventListener('animationend', () => {
       boardCell.classList.add('boardCell--attacked');
       spanElement.remove();
       game.state = '';
       if (attackedShip === null) {
-        game.player.char.voice.boardHit.play();
+        if(game.sfx === true)game.player.char.voice.boardHit.play();
         game.turn = 'player';
         renderAttackingPlayer();
       }else if(game.player.gameboard.shipsSunk()=== true){
@@ -186,7 +186,7 @@ function attackAdjacent() {
         game.bot.recentlyHitShip = null;
         boardCell.classList.add('boardCell__withImage');
         boardCell.style.backgroundImage = `url('./assets/images/${attackedShip.icon}`;
-        game.player.char.voice.shipHit.play();
+        if(game.sfx === true)game.player.char.voice.shipHit.play();
         renderAttackingPlayer();
         const sunkShipLine = generateShipSunkLines(
           game.player.char,
@@ -205,7 +205,7 @@ function attackAdjacent() {
         game.bot.recentlyHitShip = attackedShip;
         boardCell.classList.add('boardCell__withImage');
         boardCell.style.backgroundImage = `url('./assets/images/${attackedShip.icon}`;
-        game.player.char.voice.shipHit.play();
+       if(game.sfx === true) game.player.char.voice.shipHit.play();
         renderAttackingPlayer();
         setTimeout(() => {
           attackPlayerBoard();
@@ -270,7 +270,7 @@ function attackInParallel() {
         spanElement.remove();
         game.state = '';
         if (attackedShip === null) {
-          game.player.char.voice.boardHit.play();
+          if(game.sfx === true)game.player.char.voice.boardHit.play();
           game.turn = 'player';
           renderAttackingPlayer();
         }else if(game.player.gameboard.shipsSunk()=== true){

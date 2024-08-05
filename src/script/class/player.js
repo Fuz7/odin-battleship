@@ -8,6 +8,8 @@ export default class Player {
     this.hitState = null;
     this.recentlyHitShip = null;
     this.missedCounter = 0;
+    this.missedTaunted = Math.floor(Math.random * 5 + 5)
+
   }
 
   setCharacter(char) {
@@ -20,6 +22,10 @@ export default class Player {
 
   resetMissedAttackCounter() {
     this.missedCounter = 0;
+  }
+
+  rerollMissedTaunted(){
+    this.missedTaunted = Math.floor(Math.random * 5 + 5)
   }
 
   checkHitValidity(coordinate) {

@@ -30,7 +30,9 @@ async function generateBattleEntranceVoiceLines() {
       resolve('500 millisecond has passed');
     }, 1000);
   });
-  await game.player.char.voice.entrance.play();
+  if (game.sfx === true) {
+    await game.player.char.voice.entrance.play();
+  }
   if (game.player.char.characterName === 'necoArc') {
     await generateTextAnimation(
       'playerText',
@@ -48,7 +50,9 @@ async function generateBattleEntranceVoiceLines() {
       resolve('1 second has passed');
     }, 1000);
   });
-  await game.bot.char.voice.entrance.play();
+  if (game.sfx === true) {
+    await game.bot.char.voice.entrance.play();
+  }
 
   if (game.player.char.characterName === 'necoArc') {
     await generateTextAnimation(
@@ -76,7 +80,7 @@ async function generateBattleEntranceVoiceLines() {
     }, 200);
   });
 
-  game.player.char.voice.letsRock.play();
+  if(game.sfx === true)game.player.char.voice.letsRock.play();
 
   await new Promise((resolve) => {
     setTimeout(() => {
@@ -105,9 +109,9 @@ function generateShipSunkLines(character, shipName) {
       `Argh! ${shipName} is down? You’ve unleashed the full chaos now, Neco-Arc!`,
       `Yikes! ${shipName} is out? Guess it’s time for some extra-chaotic mayhem!`,
     ];
-    return voiceLines[randomNum]
+    return voiceLines[randomNum];
   }
-  return null
+  return null;
 }
 
 export {

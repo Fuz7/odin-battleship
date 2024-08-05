@@ -16,11 +16,11 @@ Neco-Arc: Nyaa~! Not before I turn your fleet into fish food, Neco Chaos!
  
 ## Neco Chaos Dodges Arc attacks multiple times in a row
 
-Neco Chaos: Mwahaha! Four misses, Neco-Arc? Are you trying to hit me or just playing with shadows?
+Neco Chaos:  Mwahaha! Four misses? You're pathetic, Neco-Arc!
 
 ## Neco Arc Dodges Chaos attacks multiple times in a row
 
-Neco-Arc: Nyaa~! Four misses in a row! Are you aiming or just playing with yarn, Neco Chaos?
+Neco-Arc: Nyaa~! Four misses?  Neco Chaos Are you even trying?
 
 
 ## Neco Arc ship gets destroyed
@@ -52,7 +52,7 @@ Neco Chaos: Grr, you may have won, but next time I'll turn your victory into ash
 
 ## Neco Chaos Wins
 
-Neco Chaos: Mwahaha! Victory is mine, Neco-Arc! Your cute tricks are worthless against true chaos!
+Neco Chaos: Mwahaha!  tricks are worthless against true chaos!
 
 Neco-Arc: Nyaa~! You may have won this time, but I’ll be back to claw my way to victory!
 

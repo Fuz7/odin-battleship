@@ -68,7 +68,6 @@ function renderBotBoard() {
           spanElement.style.top = topPos + 'px';
           spanElement.style.left = leftPos + 'px';
 
-          console.log(attackSoundEffect.played.length);
           if (game.sfx === true) attackSoundEffect.play();
           const xPos = parseInt(e.target.getAttribute('data-cell'), 10);
           const yPos = parseInt(e.target.getAttribute('data-row'), 10);
@@ -112,6 +111,7 @@ function renderBotBoard() {
               e.target.classList.add('boardCell__withImage');
               e.target.style.backgroundImage = `url('./assets/images/${shipGotHit.icon}`;
               if (game.sfx === true) game.player.char.voice.shipHit.play();
+              game.player.resetMissedAttackCounter()
             }else {
               if (game.sfx === true) game.player.char.voice.boardHit.play();
               game.turn = 'bot';
