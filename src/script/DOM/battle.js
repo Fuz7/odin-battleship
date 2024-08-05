@@ -60,7 +60,7 @@ import { attackPlayerBoard, renderAttackingPlayer } from '../utils/attack';
           spanElement.style.left = leftPos + 'px';
 
           console.log(attackSoundEffect.played.length);
-          attackSoundEffect.play();
+          if(game.sfx === true)attackSoundEffect.play();
           const xPos = parseInt(e.target.getAttribute('data-cell'), 10);
           const yPos = parseInt(e.target.getAttribute('data-row'), 10);
           const shipGotHit = game.player.hitBoard([xPos, yPos]);
@@ -72,9 +72,12 @@ import { attackPlayerBoard, renderAttackingPlayer } from '../utils/attack';
             if (shipGotHit instanceof Ship) {
               e.target.classList.add('boardCell__withImage');
               e.target.style.backgroundImage = `url('./assets/images/${shipGotHit.icon}`;
-              game.player.char.voice.shipHit.play();
-            } else {
-              game.player.char.voice.boardHit.play();
+              if(game.sfx === true)game.player.char.voice.shipHit.play();
+            }else if(game.bot.gameboard.shipsSunk() === true){
+                console.log('You Win')
+            }
+            else {
+              if(game.sfx === true)game.player.char.voice.boardHit.play();
               game.turn = 'bot';
               renderAttackingPlayer();
               attackPlayerBoard();

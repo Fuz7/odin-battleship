@@ -1,3 +1,4 @@
+import { game } from "./charSel"
 export default function renderVisibility(){
   if(this.classList.contains(`${this.id}--visible`)){
     this.classList.remove(`${this.id}--visible`)
@@ -25,9 +26,11 @@ function toggleButton() {
   if (this.classList.contains(`${this.id}--on`)) {
     this.classList.remove(`${this.id}--on`);
     this.classList.add(`${this.id}--off`);
+    game.sfx = false
   } else if (this.classList.contains(`${this.id}--off`)) {
     this.classList.remove(`${this.id}--off`);
     this.classList.add(`${this.id}--on`);
+    game.sfx = true
   }
 }
 
